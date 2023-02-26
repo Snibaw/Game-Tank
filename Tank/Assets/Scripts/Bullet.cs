@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float max_distance = 2f;
-    [SerializeField] private float damage = 1f;
+    private string tag = "Player";
+    private bool canBounce = false;
+    private float speed = 10f;
+    private float max_distance = 2f;
+    private float damage = 1f;
     private float conquared_distance = 0f;
     private Rigidbody2D rb;
     private Vector2 startPosition;
@@ -29,11 +31,26 @@ public class Bullet : MonoBehaviour
         }
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.tag == "Enemy")
+        if(other.gameObject.tag == tag)
         {
-            Debug.Log("Hit"+other.gameObject.name);
-            // other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+            Debug.Log("Hit"+tag);
+            other.gameObject.GetComponentInParent<Health>().TakeDamage(damage);
             Destroy(gameObject);
         }
+        else if(other.gameObject.tag == "Environnement")
+        {
+            if(!canBounce)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+    public void Initialise(float damage, float speed, float max_distance, bool canBounce, string tag)
+    {
+        this.damage = damage;
+        this.speed = speed;
+        this.max_distance = max_distance;
+        this.canBounce = canBounce;
+        this.tag = tag;
     }
 }
