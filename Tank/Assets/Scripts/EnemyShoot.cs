@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace Enemy
 {
     public class EnemyShoot : MonoBehaviour
@@ -17,9 +18,10 @@ namespace Enemy
         // For the bullet
         [SerializeField] private string tag = "Player";
         [SerializeField] private bool canBounce = false;
-        [SerializeField] private float speed = 5f;
+        [SerializeField] private float bullet_speed = 5f;
         [SerializeField] private float max_distance = 2f;
-        [SerializeField] private float damage = 1f;
+        [SerializeField] private float bullet_damage = 1f;
+        [SerializeField] private int life_time = 50;
         
         // Start is called before the first frame update
         void Start()
@@ -48,8 +50,9 @@ namespace Enemy
                 Quaternion bullet_rotation = Quaternion.Euler(0, 0, barrel.rotation.eulerAngles.z + 90);
                 GameObject bullet = Instantiate(bulletPrefab, barrel.position, bullet_rotation);
                 Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), tankCollider);
-                bullet.GetComponent<Bullet>().Initialise(damage, speed, max_distance, canBounce, tag);
+                bullet.GetComponent<Bullet>().Initialise(bullet_damage, bullet_speed, max_distance,life_time, canBounce, tag);
             }
         }
+        
     }
 }

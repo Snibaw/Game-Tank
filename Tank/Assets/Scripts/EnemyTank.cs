@@ -9,6 +9,7 @@ namespace Enemy
         private bool playerInView = false;
         public GameObject player;
         public GameObject canon;
+        public bool playerFound = false;
         [SerializeField] private float timeToRotate = 2f;
         [SerializeField] private float maxrange = 15f;
         [SerializeField] private float rotation_speed = 5f;
@@ -28,21 +29,22 @@ namespace Enemy
             RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxrange); // Raycast from the tank to the player
             if(hit.collider.tag == "Player")
             {
-                Shoot(hit.collider.gameObject);
+                playerFound = true;
+                Shoot(hit.collider.gameObject.transform.position);
             }
             else
             {
-                playerInView = false;
+                playerFound = false;
             }
         }
-        private void Shoot(GameObject player)
+        public void Shoot(Vector3 playerPosition)
         {
-            RotateCanon(player); // Rotate the canon to the player
+            RotateCanon(playerPosition); // Rotate the canon to the player
             StartCoroutine(WaitBeforeShoot()); // Shoot the player
         }
-        private void RotateCanon(GameObject player) // Rotate the canon to the player with smooth rotation
+        private void RotateCanon(Vector3 playerPosition) // Rotate the canon to the player with smooth rotation
         {
-            Vector3 direction = player.transform.position - canon.transform.position;
+            Vector3 direction = playerPosition - canon.transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             //Smooth the rotation
             var rotation_quaternion = Quaternion.Euler(0,0,angle-90);

@@ -12,6 +12,8 @@ public class Bullet : MonoBehaviour
     private float conquared_distance = 0f;
     private Rigidbody2D rb;
     private Vector2 startPosition;
+    // Boucing
+    Vector2 lastVelocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +26,14 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        lastVelocity = rb.velocity;
         conquared_distance = Vector2.Distance(transform.position, startPosition);
         if(conquared_distance >= max_distance)
         {
             Destroy(gameObject);
         }
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == tag)
         {
             Debug.Log("Hit"+tag);
@@ -43,14 +46,30 @@ public class Bullet : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+            else
+            {
+                // Bounce once
+                var speed = lastVelocity.magnitude;
+                var direction = Vector2.Reflect(lastVelocity.normalized, other.contacts[0].normal);
+                float rot_y = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calculate the angle of the direction in y axis
+                transform.rotation = Quaternion.Euler(0, 0, rot_y-90); // Convert the angle to quaternion
+                rb.velocity= direction * Mathf.Max(speed, 0f);
+                canBounce = false;
+            }
         }
     }
-    public void Initialise(float damage, float speed, float max_distance, bool canBounce, string tag)
+    public void Initialise(float damage, float speed, float max_distance, int life_time, bool canBounce, string tag)
     {
         this.damage = damage;
         this.speed = speed;
         this.max_distance = max_distance;
         this.canBounce = canBounce;
         this.tag = tag;
+        StartCoroutine(DestroyBullet(life_time)); // Destroy the bullet according to the life time
+    }
+    IEnumerator DestroyBullet(int life_time)
+    {
+        yield return new WaitForSeconds(life_time);
+        Destroy(gameObject);
     }
 }

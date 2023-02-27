@@ -19,6 +19,7 @@ namespace Player
         [SerializeField] private float speed = 10f;
         [SerializeField] private float max_distance = 2f;
         [SerializeField] private float damage = 1f;
+        [SerializeField] private int life_time = 50;
         // Start is called before the first frame update
         void Start()
         {
@@ -47,7 +48,7 @@ namespace Player
                         Quaternion bullet_rotation = Quaternion.Euler(0, 0, barrel.rotation.eulerAngles.z + 90);
                         GameObject bullet = Instantiate(bulletPrefab, barrel.position, bullet_rotation);
                         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), tankCollider);
-                        bullet.GetComponent<Bullet>().Initialise(damage, speed, max_distance, canBounce, tag);
+                        bullet.GetComponent<Bullet>().Initialise(damage, speed, max_distance,life_time ,canBounce, tag);
                     }
                 }
             }

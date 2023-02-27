@@ -324,6 +324,7 @@ GameObject:
   - component: {fileID: 8149724546136301607}
   - component: {fileID: 8149724546136301603}
   - component: {fileID: 8149724546136301602}
+  - component: {fileID: 4526433611815412254}
   m_Layer: 0
   m_Name: Basic_Ennemy
   m_TagString: Enemy
@@ -383,6 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   canon: {fileID: 8149724546565092195}
+  playerFound: 0
   timeToRotate: 2
   maxrange: 15
   rotation_speed: 2
@@ -403,9 +405,23 @@ MonoBehaviour:
   reloadDelay: 3
   tag: Player
   canBounce: 0
-  speed: 5
+  bullet_speed: 5
   max_distance: 15
-  damage: 1
+  bullet_damage: 1
+  life_time: 5
+--- !u!114 &4526433611815412254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149724546136301624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d787fae6421d61d49af1baea6520873a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifes: 1
 --- !u!1 &8149724546565092195
 GameObject:
   m_ObjectHideFlags: 0
