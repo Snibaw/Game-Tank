@@ -25,6 +25,7 @@ namespace Enemy
         [SerializeField] private bool isDobleShot = false;
         
         [SerializeField] private float timeBetweenDobleShots = 0.2f;
+        [SerializeField] private bool isLaser = false;
         
         // Start is called before the first frame update
         void Start()
@@ -56,25 +57,32 @@ namespace Enemy
                 }
                 else
                 {
-                    InstantiateBullet();  
+                    InstantiateBullet(isLaser);  
                 } 
             }
         }
-        private void InstantiateBullet()
+        private void InstantiateBullet(bool isLaser = false)
         {
             foreach (Transform single_barrel in barrels)
             {
                 Quaternion bullet_rotation = Quaternion.Euler(0, 0, single_barrel.rotation.eulerAngles.z + 90);
                 GameObject bullet = Instantiate(bulletPrefab, single_barrel.position, bullet_rotation);
                 Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), tankCollider);
-                bullet.GetComponent<Bullet>().Initialise(bullet_damage, bullet_speed, max_distance,life_time, canBounce, tag);
+                if(isLaser)
+                {
+                    bullet.GetComponent<Laser>().Initialise(bullet_damage,life_time, tag);
+                }
+                else
+                {
+                    bullet.GetComponent<Bullet>().Initialise(bullet_damage, bullet_speed, max_distance,life_time, canBounce, tag);
+                }
             }
         }
         IEnumerator DobleShot()
         {
-            InstantiateBullet();
+            InstantiateBullet(isLaser);
             yield return new WaitForSeconds(timeBetweenDobleShots);
-            InstantiateBullet();
+            InstantiateBullet(isLaser);
         }
         
     }
