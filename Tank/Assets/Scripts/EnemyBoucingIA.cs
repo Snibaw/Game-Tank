@@ -19,11 +19,12 @@ namespace Enemy
 
         // Here we will store all the points that we want the ray to bounce off
         private List<Vector2> pointsOfReflection = new List<Vector2>();
-        public GameObject player;
+        private GameObject player;
         private void Start() 
         {
             // The direction the ray will be cast at
             // Initially it's the direction from the enemy to the player
+            player = GameObject.FindGameObjectsWithTag("Player")[0];
             original_direction = (player.transform.position - transform.position).normalized;
             direction = original_direction;
             

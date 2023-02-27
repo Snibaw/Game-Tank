@@ -382,12 +382,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4befb2bc925254b46bd9f97305125003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   canon: {fileID: 8149724546565092195}
   playerFound: 0
-  timeToRotate: 2
+  timeToRotate: 1
   maxrange: 15
-  rotation_speed: 2
+  rotation_speed: 4
 --- !u!114 &8149724546136301602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +399,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68a7c018204ceb4c941e3b65205c8dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrel: {fileID: 4616460180426748405}
+  barrels:
+  - {fileID: 4616460180426748405}
   bulletPrefab: {fileID: 7276161061967019756, guid: 009ff4341ac4e4a4aac564644291e552, type: 3}
   reloadDelay: 3
   tag: Player
@@ -409,6 +409,8 @@ MonoBehaviour:
   max_distance: 15
   bullet_damage: 1
   life_time: 5
+  isDobleShot: 0
+  timeBetweenDobleShots: 0.2
 --- !u!114 &4526433611815412254
 MonoBehaviour:
   m_ObjectHideFlags: 0

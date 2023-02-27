@@ -7,8 +7,7 @@ namespace Enemy
     public class EnemyShoot : MonoBehaviour
     {
         //To shoot
-        
-        public Transform barrel;
+        public Transform[] barrels;
         public GameObject bulletPrefab;
         [SerializeField] private float reloadDelay = 3f;
         private bool canShoot = true;
@@ -22,6 +21,8 @@ namespace Enemy
         [SerializeField] private float max_distance = 2f;
         [SerializeField] private float bullet_damage = 1f;
         [SerializeField] private int life_time = 50;
+        [SerializeField] private bool isDobleShot = false;
+        [SerializeField] private float timeBetweenDobleShots = 0.2f;
         
         // Start is called before the first frame update
         void Start()
@@ -46,12 +47,32 @@ namespace Enemy
             if(canShoot)
             {
                 canShoot = false;
-                currentDelay = reloadDelay;          
-                Quaternion bullet_rotation = Quaternion.Euler(0, 0, barrel.rotation.eulerAngles.z + 90);
-                GameObject bullet = Instantiate(bulletPrefab, barrel.position, bullet_rotation);
+                currentDelay = reloadDelay;
+                if(isDobleShot)
+                {
+                    StartCoroutine(DobleShot());
+                }
+                else
+                {
+                    InstantiateBullet();  
+                } 
+            }
+        }
+        private void InstantiateBullet()
+        {
+            foreach (Transform single_barrel in barrels)
+            {
+                Quaternion bullet_rotation = Quaternion.Euler(0, 0, single_barrel.rotation.eulerAngles.z + 90);
+                GameObject bullet = Instantiate(bulletPrefab, single_barrel.position, bullet_rotation);
                 Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), tankCollider);
                 bullet.GetComponent<Bullet>().Initialise(bullet_damage, bullet_speed, max_distance,life_time, canBounce, tag);
             }
+        }
+        IEnumerator DobleShot()
+        {
+            InstantiateBullet();
+            yield return new WaitForSeconds(timeBetweenDobleShots);
+            InstantiateBullet();
         }
         
     }

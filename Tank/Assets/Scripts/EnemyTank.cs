@@ -7,16 +7,19 @@ namespace Enemy
     {
         private EnemyShoot enemyShoot;
         private bool playerInView = false;
-        public GameObject player;
+        private GameObject player;
         public GameObject canon;
         public bool playerFound = false;
         [SerializeField] private float timeToRotate = 2f;
         [SerializeField] private float maxrange = 15f;
         [SerializeField] private float rotation_speed = 5f;
+
         // Start is called before the first frame update
         void Start()
         {
             enemyShoot = GetComponent<EnemyShoot>();
+            player = GameObject.FindGameObjectsWithTag("Player")[0];
+
         }
 
         // Update is called once per frame
