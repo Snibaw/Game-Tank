@@ -21,7 +21,9 @@ namespace Enemy
         [SerializeField] private float max_distance = 2f;
         [SerializeField] private float bullet_damage = 1f;
         [SerializeField] private int life_time = 50;
+        //Type of enemy
         [SerializeField] private bool isDobleShot = false;
+        
         [SerializeField] private float timeBetweenDobleShots = 0.2f;
         
         // Start is called before the first frame update
