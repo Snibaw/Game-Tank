@@ -5,10 +5,10 @@ namespace Enemy
 {
     public class EnemyPatrol : MonoBehaviour
     {
-        [SerializeField] private float speed = 3f;
+        [SerializeField] private float speed = 2f;
         [SerializeField] private float rotation_speed = 0.5f;
         [SerializeField] private float waitTimeBeforeMove = 3f;
-        public GameObject Hull;
+        private GameObject Hull;
         public GameObject[] waypoints;
         private bool stopDelay;
         private bool waitBeforeMove = false;
@@ -17,6 +17,7 @@ namespace Enemy
         // Start is called before the first frame update
         void Start()
         {
+            Hull = transform.GetChild(0).gameObject;
             enemyTank = gameObject.GetComponent<EnemyTank>();
         }
 

@@ -22,9 +22,11 @@ namespace Enemy
         [SerializeField] private float bullet_damage = 1f;
         [SerializeField] private int life_time = 50;
         //Type of enemy
+        [SerializeField] private float timeBetweenDobleShots = 0.2f;
+        private float tripleShotSpread = 0f;
         [SerializeField] private bool isDobleShot = false;
         
-        [SerializeField] private float timeBetweenDobleShots = 0.2f;
+        [SerializeField] private bool isTripleShot = false;
         [SerializeField] private bool isLaser = false;
         
         // Start is called before the first frame update
@@ -55,6 +57,10 @@ namespace Enemy
                 {
                     StartCoroutine(DobleShot());
                 }
+                if(isTripleShot)
+                {
+                    StartCoroutine(TripleShot());
+                }
                 else
                 {
                     InstantiateBullet(isLaser);  
@@ -65,7 +71,7 @@ namespace Enemy
         {
             foreach (Transform single_barrel in barrels)
             {
-                Quaternion bullet_rotation = Quaternion.Euler(0, 0, single_barrel.rotation.eulerAngles.z + 90);
+                Quaternion bullet_rotation = Quaternion.Euler(0, 0, single_barrel.rotation.eulerAngles.z + 90+ tripleShotSpread);
                 GameObject bullet = Instantiate(bulletPrefab, single_barrel.position, bullet_rotation);
                 Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), tankCollider);
                 if(isLaser)
@@ -83,6 +89,16 @@ namespace Enemy
             InstantiateBullet(isLaser);
             yield return new WaitForSeconds(timeBetweenDobleShots);
             InstantiateBullet(isLaser);
+        }
+        private IEnumerator TripleShot()
+        {
+            tripleShotSpread = 0f;
+            InstantiateBullet();
+            yield return new WaitForSeconds(0.05f);
+            tripleShotSpread = 45f;
+            InstantiateBullet();
+            tripleShotSpread = -45f;
+            InstantiateBullet();
         }
         
     }
