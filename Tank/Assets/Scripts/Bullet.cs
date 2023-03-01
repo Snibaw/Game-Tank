@@ -40,7 +40,7 @@ public class Bullet : MonoBehaviour
             other.gameObject.GetComponentInParent<Health>().TakeDamage(damage);
             Destroy(gameObject);
         }
-        else if(other.gameObject.tag == "Environnement")
+        else if(other.gameObject.tag == "Environnement" || other.gameObject.tag == "Obstacle")
         {
             if(!canBounce)
             {

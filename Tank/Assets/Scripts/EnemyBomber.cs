@@ -19,6 +19,11 @@ namespace Enemy
         private Vector3 lastPlayerPosition;
         private Rigidbody2D rb;
         private Vector3 lastPosition;
+        public bool avoidingExplosion = false;
+        private Vector3 bombPosition;
+        public GameObject bomb_prefab;
+        private float bombSafePosition = 0f;
+        private float explosionTime = 0f;
         
 
         // Start is called before the first frame update
@@ -43,7 +48,7 @@ namespace Enemy
             RotateCanon();
             FlipHullSprite();
             DetectPlayer();
-                
+            AttackPlayer();
         }
         private void DetectPlayer()
         {
@@ -61,7 +66,11 @@ namespace Enemy
         }
         private void SetDestination()
         {
-            if(playerSeenOnce)
+            if(avoidingExplosion)
+            {
+                agent.SetDestination(bombPosition + (transform.position - player.transform.position).normalized * 5 *bombSafePosition); // 5 = experimental value
+            }
+            else if(playerSeenOnce)
             {
                 agent.SetDestination(player.transform.position);
             }
@@ -85,6 +94,31 @@ namespace Enemy
             float rot_y = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calculate the angle of the direction in y axis
             var rotation_quaternion = Quaternion.Euler(0, 0, Mathf.Round(rot_y-90)); // Convert the angle to quaternion
             Hull.transform.rotation = Quaternion.Lerp(Hull.transform.rotation, rotation_quaternion, Time.deltaTime * rotation_speed); // Smoothly rotate the sprite
+        }
+        private void AttackPlayer()
+        {
+            if(avoidingExplosion)
+            {
+                return;
+            }
+            if(Vector3.Distance(transform.position, player.transform.position) <= 1.8f)
+            {
+                // Spawn a bomb
+                GameObject bomb = Instantiate(bomb_prefab, transform.position, Quaternion.identity);
+                BombBehaviour bombBehaviour = bomb.GetComponent<BombBehaviour>();
+                explosionTime = bombBehaviour.GetExplosionTime();
+                bombSafePosition = bombBehaviour.GetExplosionRadius();
+                bombBehaviour.SetAvoidTag("Enemy");
+                // Avoid the explosion of the bomb
+                StartCoroutine(AvoidExplosion());
+                bombPosition = transform.position;
+            }
+        }
+        private IEnumerator AvoidExplosion()
+        {
+            avoidingExplosion = true;
+            yield return new WaitForSeconds(explosionTime);
+            avoidingExplosion = false;
         }
     }
 }
