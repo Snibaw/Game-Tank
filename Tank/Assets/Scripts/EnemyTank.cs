@@ -13,6 +13,7 @@ namespace Enemy
         [SerializeField] private float timeToRotate = 2f;
         [SerializeField] private float maxrange = 15f;
         [SerializeField] private float rotation_speed = 5f;
+        
 
         // Start is called before the first frame update
         void Start()
