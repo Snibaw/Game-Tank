@@ -120,6 +120,7 @@ MonoBehaviour:
   turretBarrels:
   - {fileID: 158802268}
   bulletPrefab: {fileID: 7276161061967019756, guid: 009ff4341ac4e4a4aac564644291e552, type: 3}
+  bomb_prefab: {fileID: 0}
   reloadDelay: 1
   tag: Enemy
   canBounce: 0
@@ -127,6 +128,7 @@ MonoBehaviour:
   max_distance: 20
   damage: 1
   life_time: 5
+  bombDelay: 3
 --- !u!114 &375409402
 MonoBehaviour:
   m_ObjectHideFlags: 0

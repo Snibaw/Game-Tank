@@ -97,3 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeaa3119ca758c04f83e7362b5b0d4a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tree:
+  - {fileID: 11400000, guid: 4619bd0d096062c41ac2bea82cf57a22, type: 2}
+  - {fileID: 11400000, guid: dfcc5902011cc2648a782c94dcb43816, type: 2}
+  - {fileID: 11400000, guid: 75b24ebb4c7d08241870d22abfd053ae, type: 2}
+  - {fileID: 11400000, guid: 5b6d8c77e58237f4d84ee36fcd2a8236, type: 2}
+  - {fileID: 11400000, guid: 1639e22c73e76fc4dad81769947ef86d, type: 2}
+  - {fileID: 11400000, guid: b5318a05aac17c240848834a92f148de, type: 2}
+  headOfObstacle: {fileID: 11400000, guid: 1dd94ebe6e047ad46a5e6fa7d7a16c41, type: 2}
