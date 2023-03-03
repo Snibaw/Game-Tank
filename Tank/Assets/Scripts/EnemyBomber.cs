@@ -107,7 +107,7 @@ namespace Enemy
                 GameObject bomb = Instantiate(bomb_prefab, transform.position, Quaternion.identity);
                 BombBehaviour bombBehaviour = bomb.GetComponent<BombBehaviour>();
                 explosionTime = bombBehaviour.GetExplosionTime();
-                bombSafePosition = bombBehaviour.GetExplosionRadius();
+                bombSafePosition = 2; // Experimental value
                 bombBehaviour.SetAvoidTag("Enemy");
                 // Avoid the explosion of the bomb
                 StartCoroutine(AvoidExplosion());

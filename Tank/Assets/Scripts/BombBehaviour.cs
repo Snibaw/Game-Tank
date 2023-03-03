@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Tilemaps;
 using UnityEngine;
 
 public class BombBehaviour : MonoBehaviour
@@ -7,10 +8,13 @@ public class BombBehaviour : MonoBehaviour
     
     private string avoidTag = "Undefined";
     private float explosionTime = 3f;
-    private float explosionRadius = 1.5f;
+    private Tilemap tileMapObstacles;
+    private Tilemap tileMapNoCollider;
     // Start is called before the first frame update
     void Start()
     {
+        tileMapObstacles = GameObject.Find("Obstacles").GetComponent<Tilemap>();
+        tileMapNoCollider = GameObject.Find("ObstaclesNoCollider").GetComponent<Tilemap>();
         StartCoroutine(Explode());
     }
 
@@ -33,20 +37,17 @@ public class BombBehaviour : MonoBehaviour
             {
                 collider.GetComponentInParent<Health>().TakeDamage(1f);
             }
-            if(collider.tag == "Obstacle")
-            {
-                Destroy(collider.gameObject);
-            }
+        }
+        foreach (var p in new BoundsInt(-1, -1, 0, 3, 3, 1).allPositionsWithin) // Destroy the bomb and the tiles around it
+        {
+            tileMapObstacles.SetTile(tileMapObstacles.WorldToCell(transform.position) + p, null);
+            tileMapNoCollider.SetTile(tileMapNoCollider.WorldToCell(transform.position) + p, null);
         }
         Destroy(gameObject);
     }
     public void SetAvoidTag(string tag)
     {
         this.avoidTag = tag;
-    }
-    public float GetExplosionRadius()
-    {
-        return explosionRadius;
     }
     public float GetExplosionTime()
     {
