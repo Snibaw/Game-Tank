@@ -19,13 +19,13 @@ public class BombBehaviour : MonoBehaviour
     {
         
     }
-    IEnumerator Explode()
+    IEnumerator Explode() // Explode after 3 seconds
     {
         yield return new WaitForSeconds(explosionTime);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
         foreach(Collider2D collider in colliders)
         {
-            if(collider.tag == avoidTag)
+            if(collider.tag == avoidTag) // If the collider is an enemy and the bomb is an enemy bomb, don't damage the enemy
             {
                 continue;
             }

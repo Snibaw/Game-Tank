@@ -53,21 +53,21 @@ namespace Enemy
             {
                 canShoot = false;
                 currentDelay = reloadDelay;
-                if(isDobleShot)
+                if(isDobleShot) // If the enemy is a doble shot enemy, shoot twice
                 {
                     StartCoroutine(DobleShot());
                 }
-                if(isTripleShot)
+                if(isTripleShot) // If the enemy is a triple shot enemy, shoot three bullet at once
                 {
                     StartCoroutine(TripleShot());
                 }
-                else
+                else // If the enemy is a normal enemy, shoot one bullet
                 {
                     InstantiateBullet(isLaser);  
                 } 
             }
         }
-        private void InstantiateBullet(bool isLaser = false)
+        private void InstantiateBullet(bool isLaser = false) // If is laser (not working for now) we instantiate a laser, else we instantiate a bullet
         {
             foreach (Transform single_barrel in barrels)
             {
@@ -94,7 +94,7 @@ namespace Enemy
         {
             tripleShotSpread = 0f;
             InstantiateBullet();
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.05f); // Important to avoid collision between bullets
             tripleShotSpread = 45f;
             InstantiateBullet();
             tripleShotSpread = -45f;

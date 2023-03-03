@@ -18,8 +18,8 @@ public class Health : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        if(isInvincible) return;
-        if(isPlayer)
+        if(isInvincible) return; // If the player is invincible, don't take damage
+        if(isPlayer) // If the player is taking damage, make him invincible for 2 seconds
         {
             StartCoroutine(InvincibleTiming());
         }

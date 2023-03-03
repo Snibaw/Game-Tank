@@ -67,7 +67,7 @@ namespace Enemy
         private void SetDestination()
         {
             if(avoidingExplosion)
-            {
+            {// If the tank is avoiding an explosion, it will go to the bomb position + a vector avoiding the player to avoid collision with him
                 agent.SetDestination(bombPosition + (transform.position - player.transform.position).normalized * 5 *bombSafePosition); // 5 = experimental value
             }
             else if(playerSeenOnce)
@@ -101,7 +101,7 @@ namespace Enemy
             {
                 return;
             }
-            if(Vector3.Distance(transform.position, player.transform.position) <= 1.8f)
+            if(Vector3.Distance(transform.position, player.transform.position) <= 1.8f) // If the player is close enough, we spawn a bomb
             {
                 // Spawn a bomb
                 GameObject bomb = Instantiate(bomb_prefab, transform.position, Quaternion.identity);

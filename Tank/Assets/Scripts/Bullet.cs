@@ -33,14 +33,14 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void OnCollisionEnter2D(Collision2D other) {
+    private void OnCollisionEnter2D(Collision2D other) { // If the bullet hits an enemy, destroy the bullet and damage the enemy
         if(other.gameObject.tag == tag)
         {
             Debug.Log("Hit"+tag);
             other.gameObject.GetComponentInParent<Health>().TakeDamage(damage);
             Destroy(gameObject);
         }
-        else if(other.gameObject.tag == "Environnement" || other.gameObject.tag == "Obstacle")
+        else if(other.gameObject.tag == "Environnement" || other.gameObject.tag == "Obstacle") // If the bullet hits an obstacle, destroy the bullet or bounce if it cans
         {
             if(!canBounce)
             {
@@ -58,7 +58,7 @@ public class Bullet : MonoBehaviour
             }
         }
     }
-    public void Initialise(float damage, float speed, float max_distance, int life_time, bool canBounce, string tag)
+    public void Initialise(float damage, float speed, float max_distance, int life_time, bool canBounce, string tag) // Initialise the bullet
     {
         this.damage = damage;
         this.speed = speed;

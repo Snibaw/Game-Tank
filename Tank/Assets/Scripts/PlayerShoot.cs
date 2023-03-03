@@ -53,7 +53,7 @@ namespace Player
                 {
                     canShoot = false;
                     currentDelayShoot = reloadDelay;
-                    foreach(var barrel in turretBarrels)
+                    foreach(var barrel in turretBarrels) // Spawn a bullet for each barrel
                     {            
                         Quaternion bullet_rotation = Quaternion.Euler(0, 0, barrel.rotation.eulerAngles.z + 90);
                         GameObject bullet = Instantiate(bulletPrefab, barrel.position, bullet_rotation);
