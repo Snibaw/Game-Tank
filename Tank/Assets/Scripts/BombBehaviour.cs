@@ -15,7 +15,10 @@ public class BombBehaviour : MonoBehaviour
     private Vector3Int tilePosition;
     private Vector3Int tileTreeBottomLeftPosition; // the position of the bottom left tile of the tree
     private Vector3Int tileObstacleBottomPosition; // the position of the bottom tile of the obstacle
+    private Vector3Int tileObstacleTopPosition; // the position of the bottom tile of the tree
     private Animator bombAnimator;
+    private bool bottomObstacleDestroyed = false;
+    private bool topObstacleDestroyed = false;
     
     /**
      * This script is used to destroy the bomb and the tiles around it
@@ -57,6 +60,8 @@ public class BombBehaviour : MonoBehaviour
                 Destroy(collider.gameObject);
             }
         }
+        bottomObstacleDestroyed = false;
+        topObstacleDestroyed = false;
         foreach (var p in new BoundsInt(-1, -1, 0, 3, 3, 1).allPositionsWithin) // Destroy the bomb and the tiles around it
         {
             tilePosition = tileMapObstacles.WorldToCell(transform.position) + p;
@@ -66,11 +71,57 @@ public class BombBehaviour : MonoBehaviour
             if(isTileObstacle(tilePosition)) // Destroy the head of the obstacle
             {
                 tileMapNoCollider.SetTile(tilePosition+new Vector3Int(0,1,0), null);
+                tileObstacleTopPosition = tilePosition+new Vector3Int(0,1,0);
+                topObstacleDestroyed = true;
+            }
+            else if(tileMapObstacles.GetTile(tilePosition) == obstacles[0]) // We are destroying the bottom of the obstacle
+            {
+                tileObstacleBottomPosition = tilePosition;
+                bottomObstacleDestroyed = true;
+            }
+            else if(tileMapNoCollider.GetTile(tilePosition) == obstacles[obstacles.Length-1]) // We are destroying the top of the obstacle
+            {
+                tileObstacleTopPosition = tilePosition;
+                topObstacleDestroyed = true;
             }
             tileMapObstacles.SetTile(tilePosition, null);
             tileMapNoCollider.SetTile(tilePosition, null);
             
         }
+        // We recrete a smaller obstacle with pieces of the destroyed obstacle
+        if(bottomObstacleDestroyed)
+        {
+            for(int i=0; i<6;i++)
+            {
+                if(tileMapObstacles.GetTile(tileObstacleBottomPosition) == null)
+                {
+                    tileObstacleBottomPosition += new Vector3Int(0, 1, 0);
+                }
+                else
+                {
+                    tileMapObstacles.SetTile(tileObstacleBottomPosition, obstacles[0]);
+                    break;
+                }
+            }
+        } 
+        if(topObstacleDestroyed)
+        {
+            Debug.Log("Top Obstacle Destroyed");
+            for(int i=0; i<6;i++)
+            {
+                if(tileMapObstacles.GetTile(tileObstacleTopPosition) == null)
+                {
+                    tileObstacleTopPosition -= new Vector3Int(0, 1, 0);
+                }
+                else
+                {
+                    Debug.Log("2");
+                    tileMapObstacles.SetTile(tileObstacleTopPosition, null);
+                    tileMapNoCollider.SetTile(tileObstacleTopPosition, obstacles[obstacles.Length-1]);
+                    break;
+                }
+            }
+        }  
         Destroy(gameObject);
     }
     public void SetAvoidTag(string tag)
