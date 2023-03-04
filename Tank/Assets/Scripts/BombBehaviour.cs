@@ -11,9 +11,16 @@ public class BombBehaviour : MonoBehaviour
     private Tilemap tileMapObstacles;
     private Tilemap tileMapNoCollider;
     public Tile[] Tree;
-    public Tile headOfObstacle;
+    public Tile[] obstacles;
     private Vector3Int tilePosition;
     private Vector3Int tileTreeBottomLeftPosition; // the position of the bottom left tile of the tree
+    private Vector3Int tileObstacleBottomPosition; // the position of the bottom tile of the obstacle
+    
+    /**
+     * This script is used to destroy the bomb and the tiles around it
+     * It also damages the enemies and the player
+     * It also destroys the obstacles
+     */
     // Start is called before the first frame update
     void Start()
     {
@@ -41,12 +48,17 @@ public class BombBehaviour : MonoBehaviour
             {
                 collider.GetComponentInParent<Health>().TakeDamage(1f);
             }
+            if(collider.tag == "Obstacle")
+            {
+                Destroy(collider.gameObject);
+            }
         }
         foreach (var p in new BoundsInt(-1, -1, 0, 3, 3, 1).allPositionsWithin) // Destroy the bomb and the tiles around it
         {
             tilePosition = tileMapObstacles.WorldToCell(transform.position) + p;
             
             if(isTileTree(tileMapObstacles.GetTile(tilePosition), tileMapNoCollider.GetTile(tilePosition))) continue;
+            //if(isTileObstacle(tileMapObstacles.GetTile(tilePosition), tileMapNoCollider.GetTile(tilePosition))) continue;
             
             tileMapObstacles.SetTile(tilePosition, null);
             tileMapNoCollider.SetTile(tilePosition, null);
@@ -61,6 +73,51 @@ public class BombBehaviour : MonoBehaviour
     {
         return explosionTime;
     }
+    
+    /*private bool isTileObstacle(TileBase tileObstacle,TileBase tileNoCollider) // Find if the tile is part of the obstacle
+    {
+        for (int i = 0; i < obstacles.Length; i++)
+        {
+            if (tileObstacle == obstacles[i] || tileNoCollider == obstacles[i])
+            {
+                Debug.Log("Tile Position : " + tilePosition);
+                tileObstacleBottomPosition = FindBottomTilePosition(tilePosition, i); // We need to find the bottom of the obstacle
+                DestroyObstacles(tileObstacleBottomPosition);
+                return true;
+                break;
+            }
+        }
+        return false;
+    }
+    private Vector3Int FindBottomTilePosition(Vector3Int tilePosition, int i) // Find the bottom tile of the obstacle
+    {
+        if (i == 0) // This is the bottom tile
+        {
+            return tilePosition;   
+        }
+        else // Try to find the bottom tile
+        {
+            Tile tile = tileMapObstacles.GetTile<Tile>(tilePosition + new Vector3Int(0, -1, 0));
+            while (tile != obstacles[0])
+            {
+                tilePosition += new Vector3Int(0, -1, 0);
+                tile = tileMapObstacles.GetTile<Tile>(tilePosition + new Vector3Int(0, -1, 0));
+            }
+            return tilePosition;
+        }
+    }
+    private void DestroyObstacles(Vector3Int tileBottomPosition) // Destroy the obstacle at the given position
+    {
+        Tile tile;
+        tileMapObstacles.SetTile(tileBottomPosition + new Vector3Int(0,-1,0), null); // First tile = bottom of obstacle
+        do
+        {
+            tileMapObstacles.SetTile(tileBottomPosition, null);
+            tileBottomPosition += new Vector3Int(0, 1, 0);
+            tile = tileMapNoCollider.GetTile<Tile>(tileBottomPosition);
+        } while(tile != obstacles[obstacles.Length-1]);
+        tileMapNoCollider.SetTile(tileBottomPosition, null); // Last tile = top of obstacle
+    }*/
     private bool isTileTree(TileBase tileObstacle,TileBase tileNoCollider) // Find if the tile is part of the tree
     {
         for (int i = 0; i < Tree.Length; i++)

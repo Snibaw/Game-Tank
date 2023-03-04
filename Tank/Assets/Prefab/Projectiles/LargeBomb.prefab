@@ -104,4 +104,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5b6d8c77e58237f4d84ee36fcd2a8236, type: 2}
   - {fileID: 11400000, guid: 1639e22c73e76fc4dad81769947ef86d, type: 2}
   - {fileID: 11400000, guid: b5318a05aac17c240848834a92f148de, type: 2}
-  headOfObstacle: {fileID: 11400000, guid: 1dd94ebe6e047ad46a5e6fa7d7a16c41, type: 2}
+  obstacles:
+  - {fileID: 11400000, guid: 4f8bca6ad4533c441bdbab803a1948a7, type: 2}
+  - {fileID: 11400000, guid: 7a0d01884b2232b40803658daf8482d2, type: 2}
+  - {fileID: 11400000, guid: 52d177a23718c0248a877a2df4b92bb5, type: 2}
+  - {fileID: 11400000, guid: 1dd94ebe6e047ad46a5e6fa7d7a16c41, type: 2}
