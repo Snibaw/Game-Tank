@@ -5,7 +5,7 @@ using UnityEngine;
 public class TireTrackSpawner : MonoBehaviour
 {
     public GameObject tireTrackPrefab;
-    [SerializeField] private float tireTrackSpawnTimer = 0.5f;
+    [SerializeField] private float tireTrackSpawnTimer = 0.15f;
     private float timer = 0f;
     private GameObject Parent;
     private Vector3 lastPosition;

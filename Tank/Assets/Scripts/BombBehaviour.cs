@@ -15,6 +15,7 @@ public class BombBehaviour : MonoBehaviour
     private Vector3Int tilePosition;
     private Vector3Int tileTreeBottomLeftPosition; // the position of the bottom left tile of the tree
     private Vector3Int tileObstacleBottomPosition; // the position of the bottom tile of the obstacle
+    private Animator bombAnimator;
     
     /**
      * This script is used to destroy the bomb and the tiles around it
@@ -24,6 +25,7 @@ public class BombBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bombAnimator = GetComponent<Animator>();
         tileMapObstacles = GameObject.Find("Obstacles").GetComponent<Tilemap>();
         tileMapNoCollider = GameObject.Find("ObstaclesNoCollider").GetComponent<Tilemap>();
         StartCoroutine(Explode());
@@ -36,7 +38,9 @@ public class BombBehaviour : MonoBehaviour
     }
     IEnumerator Explode() // Explode after 3 seconds
     {
-        yield return new WaitForSeconds(explosionTime);
+        yield return new WaitForSeconds(explosionTime-0.5f);
+        bombAnimator.SetTrigger("exploding");
+        yield return new WaitForSeconds(0.5f);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
         foreach(Collider2D collider in colliders)
         {

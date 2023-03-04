@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2847421084081769}
   - component: {fileID: 8118947766543206949}
   - component: {fileID: 666944786}
+  - component: {fileID: 395340228353811843}
   m_Layer: 0
   m_Name: LargeBomb
   m_TagString: Untagged
@@ -109,3 +110,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7a0d01884b2232b40803658daf8482d2, type: 2}
   - {fileID: 11400000, guid: 52d177a23718c0248a877a2df4b92bb5, type: 2}
   - {fileID: 11400000, guid: 1dd94ebe6e047ad46a5e6fa7d7a16c41, type: 2}
+--- !u!95 &395340228353811843
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8578409086245453725}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5aa7f594f2e2d8846b5c18d02d6f5b13, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
