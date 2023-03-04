@@ -38,9 +38,9 @@ public class BombBehaviour : MonoBehaviour
     }
     IEnumerator Explode() // Explode after 3 seconds
     {
-        yield return new WaitForSeconds(explosionTime-0.5f);
+        yield return new WaitForSeconds(explosionTime-0.3f);
         bombAnimator.SetTrigger("exploding");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
         foreach(Collider2D collider in colliders)
         {
@@ -63,9 +63,13 @@ public class BombBehaviour : MonoBehaviour
             
             if(isTileTree(tileMapObstacles.GetTile(tilePosition), tileMapNoCollider.GetTile(tilePosition))) continue;
             //if(isTileObstacle(tileMapObstacles.GetTile(tilePosition), tileMapNoCollider.GetTile(tilePosition))) continue;
-            
+            if(isTileObstacle(tilePosition)) // Destroy the head of the obstacle
+            {
+                tileMapNoCollider.SetTile(tilePosition+new Vector3Int(0,1,0), null);
+            }
             tileMapObstacles.SetTile(tilePosition, null);
             tileMapNoCollider.SetTile(tilePosition, null);
+            
         }
         Destroy(gameObject);
     }
@@ -77,7 +81,18 @@ public class BombBehaviour : MonoBehaviour
     {
         return explosionTime;
     }
-    
+    private bool isTileObstacle(Vector3Int tilePosition) // Find if the tile is part of the obstacle
+    {
+        Tile tile = tileMapObstacles.GetTile<Tile>(tilePosition);
+        for(int i = 0; i < obstacles.Length; i++)
+        {
+            if(tile == obstacles[i])
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     /*private bool isTileObstacle(TileBase tileObstacle,TileBase tileNoCollider) // Find if the tile is part of the obstacle
     {
         for (int i = 0; i < obstacles.Length; i++)
