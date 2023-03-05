@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
         isEnd = false;
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         playerStats.LoadPlayer();
+        playerStats.level = level;
         Debug.Log(playerStats.level);
         Debug.Log(playerStats.hightScoreLevel);
         Time.timeScale = 1;
@@ -44,10 +45,9 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0;
         isEnd = true; // to prevent player from pressing escape after win
         isPaused = true; // to prevent player from rotation cannon after win
-        playerStats.level = level + 1;
-        if(playerStats.hightScoreLevel < playerStats.level)
+        if(playerStats.hightScoreLevel < playerStats.level+1)
         {
-            playerStats.hightScoreLevel = playerStats.level;
+            playerStats.hightScoreLevel = playerStats.level+1;
         }
         playerStats.SavePlayer();
         //Load win level screen
@@ -102,7 +102,8 @@ public class LevelManager : MonoBehaviour
     }
     public void NextLevel()
     {
-        SceneManager.LoadScene("level"+level+1);
+        int level2 = level+1;
+        SceneManager.LoadScene("level"+level2);
     }
     public void RestartLevel()
     {
@@ -118,8 +119,8 @@ public class LevelManager : MonoBehaviour
 	}
     public void ResetSave()
     {
-        playerStats.level = 0;
-        playerStats.hightScoreLevel = 0;
+        playerStats.level = 1;
+        playerStats.hightScoreLevel = 1;
         playerStats.SavePlayer();
     }
 }

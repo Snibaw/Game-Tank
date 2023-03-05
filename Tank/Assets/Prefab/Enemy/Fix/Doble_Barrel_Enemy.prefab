@@ -379,8 +379,10 @@ MonoBehaviour:
   max_distance: 20
   bullet_damage: 1
   life_time: 5
-  isDobleShot: 0
   timeBetweenDobleShots: 0.2
+  isDobleShot: 0
+  isTripleShot: 0
+  isLaser: 0
 --- !u!114 &6541666292108728363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d787fae6421d61d49af1baea6520873a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifes: 1
+  lifes: 2
 --- !u!1 &1513234754179680598
 GameObject:
   m_ObjectHideFlags: 0

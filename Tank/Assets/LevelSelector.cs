@@ -14,7 +14,7 @@ public class LevelSelector : MonoBehaviour
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         playerStats.LoadPlayer();
         int highscore = playerStats.hightScoreLevel;
-        for (int i = 1; i < levelButtons.Length; i++)
+        for (int i = 0; i < levelButtons.Length; i++)
 		{
 			if (i + 1 > highscore)
 			{
