@@ -13,9 +13,13 @@ public class LevelManager : MonoBehaviour
     public TextMeshProUGUI TopText;
     public GameObject Panel;
     public Button NextLevelButton;
+    public bool isPaused = false;
+    public bool isEnd = false;
     // Start is called before the first frame update
     void Start()
     {
+        isPaused = false;
+        isEnd = false;
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         playerStats.LoadPlayer();
         Debug.Log(playerStats.level);
@@ -30,10 +34,16 @@ public class LevelManager : MonoBehaviour
         {
             LevelWin();
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            LevelPause();
+        }
     }
     private void LevelWin()
     {
         Time.timeScale = 0;
+        isEnd = true; // to prevent player from pressing escape after win
+        isPaused = true; // to prevent player from rotation cannon after win
         playerStats.level = level + 1;
         if(playerStats.hightScoreLevel < playerStats.level)
         {
@@ -46,6 +56,8 @@ public class LevelManager : MonoBehaviour
     }
     public void LevelLose()
     {
+        isPaused = true; // to prevent player from rotation cannon after lose
+        isEnd = true; // to prevent player from pressing escape after lose
         Time.timeScale = 0;
         //Load lose level screen
         Panel.SetActive(true);
@@ -59,6 +71,34 @@ public class LevelManager : MonoBehaviour
             NextLevelButton.interactable = false;
         }
 
+    }
+    public void LevelPause()
+    {
+        if(isEnd)
+        {
+            return;
+        }
+        isPaused = !isPaused;
+        if(isPaused)
+        {
+            Time.timeScale = 0;
+            Panel.SetActive(true);
+            TopText.text = "Pause";
+            if(playerStats.hightScoreLevel > level)
+            {
+                NextLevelButton.interactable = true;
+            }
+            else
+            {
+                NextLevelButton.interactable = false;
+            }
+        }
+        else
+        {
+            Time.timeScale = 1;
+            Panel.SetActive(false);
+        }
+        
     }
     public void NextLevel()
     {

@@ -12,17 +12,22 @@ namespace Player
         public GameObject Canon;
         public GameObject Hull;
         
+        private LevelManager levelManager;
         
         
         // Start is called before the first frame update
         void Start()
         {
-            
+            levelManager = GameObject.FindGameObjectsWithTag("LevelManager")[0].GetComponent<LevelManager>();
         }
 
         // Update is called once per frame
         void Update()
         {
+            if(levelManager.isPaused)
+            {
+                return;
+            }
             //Movement with ZQSD
             horizontal = Input.GetAxis("Horizontal");
             vertical = Input.GetAxis("Vertical");
