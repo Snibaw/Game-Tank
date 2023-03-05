@@ -12,10 +12,6 @@ public class MainMenu : MonoBehaviour
 		SceneManager.LoadScene(levelToLoad);
 	}
 
-	public void EndlessGame()
-	{
-		SceneManager.LoadScene("Endless");
-	}
 
 	public void SettingsButton()
 	{

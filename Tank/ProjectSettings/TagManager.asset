@@ -8,6 +8,7 @@ TagManager:
   - Environnement
   - Enemy
   - Obstacle
+  - LevelManager
   layers:
   - Default
   - TransparentFX

@@ -7,13 +7,19 @@ public class Health : MonoBehaviour
     public float lifes = 2;
     private bool isPlayer = false;
     private bool isInvincible = false;
+    private LevelManager levelManager;
     // Start is called before the first frame update
 
     void Start()
     {
+        levelManager = GameObject.FindGameObjectsWithTag("LevelManager")[0].GetComponent<LevelManager>();
         if(gameObject.tag == "Player")
         {
             isPlayer = true;
+        }
+        else if(gameObject.tag == "Enemy")
+        {
+            levelManager.numberOfEnemies++;
         }
     }
     public void TakeDamage(float damage)
@@ -26,7 +32,16 @@ public class Health : MonoBehaviour
         lifes -= damage;
         if(lifes <= 0)
         {
-            Destroy(gameObject);
+            if(isPlayer)
+            {
+                // Game Over
+                levelManager.LevelLose();
+            }
+            else if(gameObject.tag == "Enemy")
+            {
+                levelManager.numberOfEnemies--;
+                Destroy(gameObject);
+            }
         }
     }
     IEnumerator InvincibleTiming() // Flash the player when he is invincible after taking a shot

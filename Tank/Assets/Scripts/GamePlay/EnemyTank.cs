@@ -10,6 +10,7 @@ namespace Enemy
         private GameObject player;
         public GameObject canon;
         public bool playerFound = false;
+        private bool lastPlayerFound = false;
         [SerializeField] private float timeToRotate = 2f;
         [SerializeField] private float maxrange = 15f;
         [SerializeField] private float rotation_speed = 5f;
@@ -34,17 +35,26 @@ namespace Enemy
             if(hit.collider.tag == "Player")
             {
                 playerFound = true;
-                Shoot(hit.collider.gameObject.transform.position);
+                if(playerFound != lastPlayerFound)
+                {
+                    RotateCanon(player.transform.position);
+                    StartCoroutine(WaitBeforeShoot());
+                }
+                else
+                {
+                    Shoot(player.transform.position);
+                }
             }
             else
             {
                 playerFound = false;
+                lastPlayerFound = false;
             }
         }
         public void Shoot(Vector3 playerPosition)
         {
             RotateCanon(playerPosition); // Rotate the canon to the player
-            StartCoroutine(WaitBeforeShoot()); // Shoot the player
+            enemyShoot.ShootThePlayer(); // Shoot the player
         }
         private void RotateCanon(Vector3 playerPosition) // Rotate the canon to the player with smooth rotation
         {
@@ -56,11 +66,8 @@ namespace Enemy
         }
         IEnumerator WaitBeforeShoot()
         {
-            if(!playerInView)
-            {
-                yield return new WaitForSeconds(timeToRotate);
-                playerInView = true;
-            }
+            yield return new WaitForSeconds(timeToRotate);
+            lastPlayerFound = true;
             enemyShoot.ShootThePlayer();
         }
     }
