@@ -81,6 +81,7 @@ public class Bullet : MonoBehaviour
     }
     IEnumerator ExplodeBeforeDestroy()
     {
+        Debug.Log("Explode");
         rb.velocity = Vector2.zero;
         animator.SetTrigger("Explode");
         yield return new WaitForSeconds(0.5f);
@@ -88,6 +89,7 @@ public class Bullet : MonoBehaviour
     }
     IEnumerator FadeAwayBeforeDestroy()
     {
+        Debug.Log("FadeAway");
         animator.SetTrigger("FadeAway");
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);

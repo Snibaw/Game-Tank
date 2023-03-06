@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1558457173695669439}
   - component: {fileID: 3082396240645179972}
   - component: {fileID: 2851034521325133659}
-  - component: {fileID: 1075133870860273468}
+  - component: {fileID: 8344191379260470115}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Bullet
@@ -122,7 +122,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0047251917, y: -0.004725218}
+  m_Offset: {x: -0.0037199948, y: 0.00010114908}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -133,7 +133,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.20443663, y: 0.61062884}
+  m_Size: {x: 0.12724547, y: 0.6170782}
   m_EdgeRadius: 0
 --- !u!114 &2851034521325133659
 MonoBehaviour:
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 536a27b329ecfa0419f48ee221848f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &1075133870860273468
+--- !u!95 &8344191379260470115
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -157,7 +157,7 @@ Animator:
   m_GameObject: {fileID: 7276161061967019756}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f2ab7c4e6f678704193051621b14096a, type: 2}
+  m_Controller: {fileID: 9100000, guid: f771c5bf479c33f4b8e64f43191bfc11, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
