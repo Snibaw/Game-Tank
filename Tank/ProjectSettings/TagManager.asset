@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Obstacle
   - LevelManager
+  - Bullet
   layers:
   - Default
   - TransparentFX

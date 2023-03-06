@@ -12,11 +12,13 @@ public class Bullet : MonoBehaviour
     private float conquared_distance = 0f;
     private Rigidbody2D rb;
     private Vector2 startPosition;
+    private Animator animator;
     // Boucing
     Vector2 lastVelocity;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * speed;
         startPosition = transform.position;
@@ -30,7 +32,7 @@ public class Bullet : MonoBehaviour
         conquared_distance = Vector2.Distance(transform.position, startPosition);
         if(conquared_distance >= max_distance)
         {
-            Destroy(gameObject);
+            StartCoroutine(FadeAwayBeforeDestroy());
         }
     }
     private void OnCollisionEnter2D(Collision2D other) { // If the bullet hits an enemy, destroy the bullet and damage the enemy
@@ -38,13 +40,13 @@ public class Bullet : MonoBehaviour
         {
             Debug.Log("Hit"+tag);
             other.gameObject.GetComponentInParent<Health>().TakeDamage(damage);
-            Destroy(gameObject);
+            StartCoroutine(ExplodeBeforeDestroy());
         }
         else if(other.gameObject.tag == "Environnement" || other.gameObject.tag == "Obstacle") // If the bullet hits an obstacle, destroy the bullet or bounce if it cans
         {
             if(!canBounce)
             {
-                Destroy(gameObject);
+                StartCoroutine(ExplodeBeforeDestroy());
             }
             else
             {
@@ -56,6 +58,10 @@ public class Bullet : MonoBehaviour
                 rb.velocity= direction * Mathf.Max(speed, 0f);
                 canBounce = false;
             }
+        }
+        else if(other.gameObject.tag == "Bullet")
+        {
+            StartCoroutine(ExplodeBeforeDestroy());
         }
     }
     public void Initialise(float damage, float speed, float max_distance, int life_time, bool canBounce, string tag) // Initialise the bullet
@@ -69,7 +75,21 @@ public class Bullet : MonoBehaviour
     }
     IEnumerator DestroyBullet(int life_time)
     {
+
         yield return new WaitForSeconds(life_time);
+        StartCoroutine(FadeAwayBeforeDestroy());
+    }
+    IEnumerator ExplodeBeforeDestroy()
+    {
+        rb.velocity = Vector2.zero;
+        animator.SetTrigger("Explode");
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+    }
+    IEnumerator FadeAwayBeforeDestroy()
+    {
+        animator.SetTrigger("FadeAway");
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 }

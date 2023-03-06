@@ -31,25 +31,30 @@ namespace Enemy
         }
         private void DetectPlayer()
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position, maxrange); // Raycast from the tank to the player
-            if(hit.collider.tag == "Player")
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position); // Raycast from the tank to the player
+            // If distance < maxrange
+            if(Vector2.Distance(transform.position, player.transform.position) < maxrange)
             {
-                playerFound = true;
-                if(playerFound != lastPlayerFound)
+                if(hit.collider.tag == "Player")
                 {
-                    RotateCanon(player.transform.position);
-                    StartCoroutine(WaitBeforeShoot());
+                    playerFound = true;
+                    if(playerFound != lastPlayerFound)
+                    {
+                        RotateCanon(player.transform.position);
+                        StartCoroutine(WaitBeforeShoot());
+                    }
+                    else
+                    {
+                        Shoot(player.transform.position);
+                    }
                 }
                 else
                 {
-                    Shoot(player.transform.position);
+                    playerFound = false;
+                    lastPlayerFound = false;
                 }
             }
-            else
-            {
-                playerFound = false;
-                lastPlayerFound = false;
-            }
+            
         }
         public void Shoot(Vector3 playerPosition)
         {
