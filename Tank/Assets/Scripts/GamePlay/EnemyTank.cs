@@ -61,7 +61,7 @@ namespace Enemy
             RotateCanon(playerPosition); // Rotate the canon to the player
             enemyShoot.ShootThePlayer(); // Shoot the player
         }
-        private void RotateCanon(Vector3 playerPosition) // Rotate the canon to the player with smooth rotation
+        public void RotateCanon(Vector3 playerPosition) // Rotate the canon to the player with smooth rotation
         {
             Vector3 direction = playerPosition - canon.transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -69,7 +69,7 @@ namespace Enemy
             var rotation_quaternion = Quaternion.Euler(0,0,angle-90);
             canon.transform.rotation = Quaternion.Lerp(canon.transform.rotation, rotation_quaternion, Time.deltaTime * rotation_speed);
         }
-        IEnumerator WaitBeforeShoot()
+        public IEnumerator WaitBeforeShoot()
         {
             yield return new WaitForSeconds(timeToRotate);
             lastPlayerFound = true;

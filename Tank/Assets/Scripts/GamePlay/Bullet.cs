@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     private float max_distance = 2f;
     private float damage = 1f;
     private float conquared_distance = 0f;
+    private int maxBounces = 0;
     private Rigidbody2D rb;
     private Vector2 startPosition;
     private Animator animator;
@@ -44,7 +45,7 @@ public class Bullet : MonoBehaviour
         }
         else if(other.gameObject.tag == "Environnement" || other.gameObject.tag == "Obstacle") // If the bullet hits an obstacle, destroy the bullet or bounce if it cans
         {
-            if(!canBounce)
+            if(!canBounce || maxBounces <= 0)
             {
                 StartCoroutine(ExplodeBeforeDestroy());
             }
@@ -64,13 +65,14 @@ public class Bullet : MonoBehaviour
             StartCoroutine(ExplodeBeforeDestroy());
         }
     }
-    public void Initialise(float damage, float speed, float max_distance, int life_time, bool canBounce, string tag) // Initialise the bullet
+    public void Initialise(float damage, float speed, float max_distance, int life_time, bool canBounce, string tag, int maxBounces = 0) // Initialise the bullet
     {
         this.damage = damage;
         this.speed = speed;
         this.max_distance = max_distance;
         this.canBounce = canBounce;
         this.tag = tag;
+        this.maxBounces = maxBounces;
         StartCoroutine(DestroyBullet(life_time)); // Destroy the bullet according to the life time
     }
     IEnumerator DestroyBullet(int life_time)

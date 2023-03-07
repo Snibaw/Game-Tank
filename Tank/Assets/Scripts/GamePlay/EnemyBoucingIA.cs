@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 namespace Enemy
 {
@@ -108,7 +109,8 @@ namespace Enemy
                     }
                     else if(DetectIfPlayerInDirection(direction)) // We found the player !
                     {
-                        enemyTank.Shoot(last_hit.point);
+                        enemyTank.RotateCanon(last_hit.point);
+                        StartCoroutine(enemyTank.WaitBeforeShoot());
                     }
                     else // We reach max angle, time to go down
                     {
@@ -124,7 +126,8 @@ namespace Enemy
                     }
                     else if(DetectIfPlayerInDirection(direction)) // We found the player !
                     {
-                        enemyTank.Shoot(last_hit.point);
+                        enemyTank.RotateCanon(last_hit.point);
+                        StartCoroutine(enemyTank.WaitBeforeShoot());
                     }
                     else // We reach max angle, the end of both phases
                     {
