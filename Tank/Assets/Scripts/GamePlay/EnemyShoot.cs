@@ -23,6 +23,7 @@ namespace Enemy
         [SerializeField] private int life_time = 50;
         //Type of enemy
         [SerializeField] private float timeBetweenDobleShots = 0.2f;
+        [SerializeField] public int maxBounces = 0;
         private float tripleShotSpread = 0f;
         [SerializeField] private bool isDobleShot = false;
         
@@ -80,7 +81,7 @@ namespace Enemy
                 }
                 else
                 {
-                    bullet.GetComponent<Bullet>().Initialise(bullet_damage, bullet_speed, max_distance,life_time, canBounce, tag);
+                    bullet.GetComponent<Bullet>().Initialise(bullet_damage, bullet_speed, max_distance,life_time, canBounce, tag, maxBounces);
                 }
             }
         }

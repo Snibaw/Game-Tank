@@ -470,9 +470,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canon: {fileID: 9078900141305319963}
   playerFound: 0
-  timeToRotate: 1
+  timeToRotate: 0.5
   maxrange: 30
-  rotation_speed: 4
+  rotation_speed: 10
 --- !u!114 &9078900143075885402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,8 +495,11 @@ MonoBehaviour:
   max_distance: 30
   bullet_damage: 1
   life_time: 5
-  isDobleShot: 0
   timeBetweenDobleShots: 0.2
+  maxBounces: 2
+  isDobleShot: 0
+  isTripleShot: 0
+  isLaser: 0
 --- !u!114 &3618087850870899558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -522,7 +525,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d6ed48d4f1c2a9418e0202edf8992e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxBounces: 2
-  maxDistance: 100
+  maxDistance: 50
   step: 0.05
   maxAngle: 0.95

@@ -57,7 +57,7 @@ public class Bullet : MonoBehaviour
                 float rot_y = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calculate the angle of the direction in y axis
                 transform.rotation = Quaternion.Euler(0, 0, rot_y-90); // Convert the angle to quaternion
                 rb.velocity= direction * Mathf.Max(speed, 0f);
-                canBounce = false;
+                maxBounces--;
             }
         }
         else if(other.gameObject.tag == "Bullet")

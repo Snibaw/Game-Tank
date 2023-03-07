@@ -6,7 +6,7 @@ namespace Enemy
 {
     public class EnemyBoucingIA : MonoBehaviour
     {
-        public int maxBounces = 2;
+        private int maxBounces;
         public float maxDistance = 100f;
         private Vector2 original_direction;
         private Vector2 direction;
@@ -14,6 +14,7 @@ namespace Enemy
         [SerializeField] private float maxAngle = 0.95f;
         private bool goingUp = true;
         private EnemyTank enemyTank;
+        private EnemyShoot enemyShoot;
         private bool last_playerFound = false; // Know if the player just has been found or not
         
         private RaycastHit2D last_hit;
@@ -30,6 +31,8 @@ namespace Enemy
             direction = original_direction;
             
             enemyTank = GetComponent<EnemyTank>();
+            enemyShoot = GetComponent<EnemyShoot>();
+            maxBounces = enemyShoot.maxBounces;
         }
         private void Update()
         {
