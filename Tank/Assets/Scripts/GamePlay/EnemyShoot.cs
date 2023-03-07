@@ -95,9 +95,10 @@ namespace Enemy
         {
             tripleShotSpread = 0f;
             InstantiateBullet();
-            yield return new WaitForSeconds(0.05f); // Important to avoid collision between bullets
+            yield return new WaitForSeconds(0.1f); // Important to avoid collision between bullets
             tripleShotSpread = 45f;
             InstantiateBullet();
+            yield return new WaitForSeconds(0.05f);
             tripleShotSpread = -45f;
             InstantiateBullet();
         }
