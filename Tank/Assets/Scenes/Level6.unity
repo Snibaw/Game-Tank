@@ -2116,18 +2116,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boucing_Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 9078900143075885379, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
-      propertyPath: maxBounces
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9078900143075885403, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
-      propertyPath: timeToRotate
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9078900143075885403, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
-      propertyPath: rotation_speed
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 9078900143075885404, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -2518,7 +2506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3533449221558055053, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.03
+      value: -2.6
       objectReference: {fileID: 0}
     - target: {fileID: 3533449221558055053, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
       propertyPath: m_LocalPosition.z
