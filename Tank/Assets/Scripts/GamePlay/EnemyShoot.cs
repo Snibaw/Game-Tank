@@ -58,7 +58,7 @@ namespace Enemy
                 {
                     StartCoroutine(DobleShot());
                 }
-                if(isTripleShot) // If the enemy is a triple shot enemy, shoot three bullet at once
+                else if(isTripleShot) // If the enemy is a triple shot enemy, shoot three bullet at once
                 {
                     StartCoroutine(TripleShot());
                 }
@@ -87,9 +87,9 @@ namespace Enemy
         }
         IEnumerator DobleShot()
         {
-            InstantiateBullet(isLaser);
+            InstantiateBullet();
             yield return new WaitForSeconds(timeBetweenDobleShots);
-            InstantiateBullet(isLaser);
+            InstantiateBullet();
         }
         private IEnumerator TripleShot()
         {

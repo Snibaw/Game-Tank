@@ -90,14 +90,15 @@ MonoBehaviour:
   barrels:
   - {fileID: 8056422351055861108}
   bulletPrefab: {fileID: 7276161061967019756, guid: 009ff4341ac4e4a4aac564644291e552, type: 3}
-  reloadDelay: 3
+  reloadDelay: 1.5
   tag: Player
   canBounce: 0
   bullet_speed: 9
   max_distance: 20
   bullet_damage: 1
   life_time: 5
-  timeBetweenDobleShots: 0.2
+  timeBetweenDobleShots: 0.1
+  maxBounces: 0
   isDobleShot: 1
   isTripleShot: 0
   isLaser: 0
@@ -113,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d787fae6421d61d49af1baea6520873a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifes: 1
+  lifes: 2
 --- !u!1 &6829563876103369725
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +505,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8056422351055861107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
