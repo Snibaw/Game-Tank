@@ -487,7 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrels:
   - {fileID: 5546164023401517197}
-  bulletPrefab: {fileID: 7276161061967019756, guid: 009ff4341ac4e4a4aac564644291e552, type: 3}
+  bulletPrefab: {fileID: 7276161061967019756, guid: 33697c47802ac9b48a98058f489d2e80, type: 3}
   reloadDelay: 2.5
   tag: Player
   canBounce: 1
