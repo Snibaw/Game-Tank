@@ -45,7 +45,7 @@ public class BombBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(explosionTime-0.5f);
         bombAnimator.SetTrigger("exploding");
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
         foreach(Collider2D collider in colliders)
         {
@@ -129,7 +129,7 @@ public class BombBehaviour : MonoBehaviour
                 }
             }
         }  
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.4f);
         Destroy(gameObject);
     }
     public void SetAvoidTag(string tag)

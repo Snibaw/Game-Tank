@@ -1,5 +1,13 @@
 Main menu ilmage https://www.freepik.com/free-vector/city-fire-war-destroy-soldier-ammunition_31904177.htm#query=war%20cartoon&position=0&from_view=keyword&track=ais
 Tank asset 1 https://free-game-assets.itch.io/free-2d-tank-game-assets
 Tank Asset 2 https://www.kenney.nl/assets/topdown-tanks-redux
-https://pondgames.itch.io/ttt-series-rocky-grassland
-https://pzuh.itch.io/free-fantasy-game-gui
+TILES : https://pondgames.itch.io/ttt-series-rocky-grassland
+UI : https://pzuh.itch.io/free-fantasy-game-gui
+MUSIC MENU : https://opengameart.org/content/battle-theme-a
+MUSIC MENU : https://opengameart.org/content/battle-theme-b-for-rpg
+MUSIC GAMEPLAY : https://opengameart.org/content/boss-battle-music 
+
+
+//MUSIC MENU : https://opengameart.org/content/last-minute
+//SHOP MENU : https://opengameart.org/content/coffee-brewed-in-times-of-war
+//FIGHT MENU : https://opengameart.org/content/jammed-with-limbs

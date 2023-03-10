@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfEnemies: 0
-  level: 10
   TopText: {fileID: 0}
   MidText: {fileID: 0}
   MoneyText: {fileID: 0}
@@ -54,3 +53,4 @@ MonoBehaviour:
   NextLevelButton: {fileID: 0}
   isPaused: 0
   isEnd: 0
+  settingsWindow: {fileID: 0}
