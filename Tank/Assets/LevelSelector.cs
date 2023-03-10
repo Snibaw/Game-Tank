@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class LevelSelector : MonoBehaviour
 {
+    public Sprite LockButtonImage;
     public Button[] levelButtons;
     private PlayerStats playerStats;
     private void Start()
@@ -18,7 +19,9 @@ public class LevelSelector : MonoBehaviour
 		{
 			if (i + 1 > highscore)
 			{
-				levelButtons[i].interactable = false;
+                levelButtons[i].GetComponent<Image>().sprite = LockButtonImage;
+                levelButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
+                levelButtons[i].interactable = false;
 			}
 		}
     }
