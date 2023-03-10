@@ -10,6 +10,7 @@ TagManager:
   - Obstacle
   - LevelManager
   - Bullet
+  - LifeUI
   layers:
   - Default
   - TransparentFX

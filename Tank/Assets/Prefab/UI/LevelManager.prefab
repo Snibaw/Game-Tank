@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfEnemies: 0
-  level: 1
+  level: 10
   TopText: {fileID: 0}
   MidText: {fileID: 0}
   MoneyText: {fileID: 0}

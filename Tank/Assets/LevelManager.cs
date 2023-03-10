@@ -9,9 +9,8 @@ public class LevelManager : MonoBehaviour
 {
     private PlayerStats playerStats;
     public int numberOfEnemies;
-    public int level;
+    private int level;
     private int money;
-    private int life;
     public TextMeshProUGUI TopText;
     public TextMeshProUGUI MidText;
     public TextMeshProUGUI MoneyText;
@@ -20,19 +19,26 @@ public class LevelManager : MonoBehaviour
     public Button NextLevelButton;
     public bool isPaused = false;
     public bool isEnd = false;
+    private GameObject[] lifeUI;
+    private Health playerHealth;
+    private Scene scene;
     
     // Start is called before the first frame update
     void Start()
     {
         isPaused = false;
         isEnd = false;
+        scene = SceneManager.GetActiveScene();
+        level = int.Parse(scene.name.Substring(5));
+        playerHealth = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Health>();
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         playerStats.LoadPlayer();
         playerStats.level = level;
         money = playerStats.money;
-        life = playerStats.life;
-        Debug.Log(playerStats.level);
-        Debug.Log(playerStats.hightScoreLevel);
+        lifeUI = GameObject.FindGameObjectsWithTag("LifeUI");
+        UpdateLifeUI();
+        Debug.Log("playerStats.level: " + playerStats.level+ "playerStats.hightScoreLevel: " + playerStats.hightScoreLevel);
+        Debug.Log("money: " + money);
         Time.timeScale = 1;
     }
 
@@ -132,7 +138,21 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 0;
         Panel.SetActive(true);
         MoneyText.text = money.ToString();
-        LifeText.text = life.ToString();
+        LifeText.text = playerHealth.lifes.ToString();
         MidText.text = "Level " + level;
+    }
+    public void UpdateLifeUI()
+    {
+        for(int i = 0; i < lifeUI.Length; i++)
+        {
+            if(i < playerHealth.lifes)
+            {
+                lifeUI[i].GetComponent<Image>().color = Color.white;
+            }
+            else
+            {
+                lifeUI[i].GetComponent<Image>().color = Color.black;
+            }
+        }
     }
 }

@@ -25,10 +25,6 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if(isInvincible) return; // If the player is invincible, don't take damage
-        if(isPlayer) // If the player is taking damage, make him invincible for 2 seconds
-        {
-            StartCoroutine(InvincibleTiming());
-        }
         lifes -= damage;
         if(lifes <= 0)
         {
@@ -42,6 +38,11 @@ public class Health : MonoBehaviour
                 levelManager.numberOfEnemies--;
                 Destroy(gameObject);
             }
+        }
+        if(isPlayer) // If the player is taking damage, make him invincible for 2 seconds
+        {
+            levelManager.UpdateLifeUI();
+            StartCoroutine(InvincibleTiming());
         }
     }
     IEnumerator InvincibleTiming() // Flash the player when he is invincible after taking a shot
