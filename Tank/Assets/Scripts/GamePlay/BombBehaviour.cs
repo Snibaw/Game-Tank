@@ -14,8 +14,8 @@ public class BombBehaviour : MonoBehaviour
     public Tile[] obstacles;
     private Vector3Int tilePosition;
     private Vector3Int tileTreeBottomLeftPosition; // the position of the bottom left tile of the tree
-    private Vector3Int tileObstacleBottomPosition; // the position of the bottom tile of the obstacle
-    private Vector3Int tileObstacleTopPosition; // the position of the bottom tile of the tree
+    private List<Vector3Int> tileObstacleBottomPosition; // the position of the bottom tile of the obstacle
+    private List<Vector3Int> tileObstacleTopPosition; // the position of the bottom tile of the tree
     private Animator bombAnimator;
     private bool bottomObstacleDestroyed = false;
     private bool topObstacleDestroyed = false;
@@ -28,6 +28,8 @@ public class BombBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        tileObstacleTopPosition = new List<Vector3Int>();
+        tileObstacleBottomPosition = new List<Vector3Int>();
         bombAnimator = GetComponent<Animator>();
         tileMapObstacles = GameObject.Find("Obstacles").GetComponent<Tilemap>();
         tileMapNoCollider = GameObject.Find("ObstaclesNoCollider").GetComponent<Tilemap>();
@@ -68,60 +70,65 @@ public class BombBehaviour : MonoBehaviour
             
             if(isTileTree(tileMapObstacles.GetTile(tilePosition), tileMapNoCollider.GetTile(tilePosition))) continue;
             //if(isTileObstacle(tileMapObstacles.GetTile(tilePosition), tileMapNoCollider.GetTile(tilePosition))) continue;
-            if(isTileObstacle(tilePosition)) // Destroy the head of the obstacle
-            {
-                tileMapNoCollider.SetTile(tilePosition+new Vector3Int(0,1,0), null);
-                // tileObstacleTopPosition = tilePosition+new Vector3Int(0,1,0);
-                // topObstacleDestroyed = true;
-            }
-            // else if(tileMapObstacles.GetTile(tilePosition) == obstacles[0]) // We are destroying the bottom of the obstacle
+            
+            // if(isTileObstacle(tilePosition))  // If tile is an obstacle
             // {
-            //     tileObstacleBottomPosition = tilePosition;
-            //     bottomObstacleDestroyed = true;
-            // }
-            // else if(tileMapNoCollider.GetTile(tilePosition) == obstacles[obstacles.Length-1]) // We are destroying the top of the obstacle
-            // {
-            //     tileObstacleTopPosition = tilePosition;
+            //     tileMapNoCollider.SetTile(tilePosition+new Vector3Int(0,1,0), null); // Destroy the head of the obstaclee on y+1 (if exists)
+            //     tileObstacleTopPosition = tilePosition+new Vector3Int(0,1,0);
             //     topObstacleDestroyed = true;
             // }
+            if(tileMapObstacles.GetTile(tilePosition) == obstacles[0]) // We are destroying the bottom of the obstacle
+            {
+                tileObstacleBottomPosition.Add(tilePosition);
+                bottomObstacleDestroyed = true;
+            }
+            else if(tileMapNoCollider.GetTile(tilePosition) == obstacles[obstacles.Length-1]) // We are destroying the top of the obstacle
+            {
+                tileObstacleTopPosition.Add(tilePosition);
+                topObstacleDestroyed = true;
+            }
+            // Normal destruction
             tileMapObstacles.SetTile(tilePosition, null);
             tileMapNoCollider.SetTile(tilePosition, null);
             
         }
-        // We recrete a smaller obstacle with pieces of the destroyed obstacle
-        // if(bottomObstacleDestroyed)
-        // {
-        //     for(int i=0; i<6;i++)
-        //     {
-        //         if(tileMapObstacles.GetTile(tileObstacleBottomPosition) == null)
-        //         {
-        //             tileObstacleBottomPosition += new Vector3Int(0, 1, 0);
-        //         }
-        //         else
-        //         {
-        //             tileMapObstacles.SetTile(tileObstacleBottomPosition, obstacles[0]);
-        //             break;
-        //         }
-        //     }
-        // } 
-        // if(topObstacleDestroyed)
-        // {
-        //     Debug.Log("Top Obstacle Destroyed");
-        //     for(int i=0; i<6;i++)
-        //     {
-        //         if(tileMapObstacles.GetTile(tileObstacleTopPosition) == null)
-        //         {
-        //             tileObstacleTopPosition -= new Vector3Int(0, 1, 0);
-        //         }
-        //         else
-        //         {
-        //             Debug.Log("2");
-        //             tileMapObstacles.SetTile(tileObstacleTopPosition, null);
-        //             tileMapNoCollider.SetTile(tileObstacleTopPosition, obstacles[obstacles.Length-1]);
-        //             break;
-        //         }
-        //     }
-        // }  
+        //We recrete a smaller obstacle with pieces of the destroyed obstacle
+        if(bottomObstacleDestroyed)
+        {
+            for(int j = 0; j < tileObstacleBottomPosition.Count; j++) // For each bottom tile of the obstacle we found
+            {
+                for(int i=0; i<6;i++)
+                {
+                    if(tileMapObstacles.GetTile(tileObstacleBottomPosition[j]) == null) // If the tile is empty we continue to search
+                    {
+                        tileObstacleBottomPosition[j] += new Vector3Int(0, 1, 0);
+                    }
+                    else
+                    {
+                        tileMapObstacles.SetTile(tileObstacleBottomPosition[j], obstacles[0]); // If the tile is an obstacle we create the obstacle by placing a bottom tile
+                        break;
+                    }
+                }
+            }
+        } 
+        if(topObstacleDestroyed)
+        {
+            for(int j = 0; j < tileObstacleTopPosition.Count; j++) // For each top tile of the obstacle we found
+            {
+                for(int i=0; i<6;i++)
+                {
+                    if(tileMapObstacles.GetTile(tileObstacleTopPosition[j]) == null) // If the tile is empty we continue to search
+                    {
+                        tileObstacleTopPosition[j] += new Vector3Int(0, -1, 0);
+                    }
+                    else
+                    {
+                        tileMapNoCollider.SetTile(tileObstacleTopPosition[j] + new Vector3Int(0,1,0), obstacles[obstacles.Length-1]); // If the tile is an obstacle we create the obstacle by placing a top tile on top of it
+                        break;
+                    }
+                }
+            }
+        }  
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
