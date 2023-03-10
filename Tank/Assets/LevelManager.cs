@@ -117,9 +117,9 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    public void QuitGame()
+    public void LevelSelector()
 	{
-		Application.Quit();
+		SceneManager.LoadScene("LevelSelect");
 	}
     public void ResetSave()
     {
