@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     private bool isPlayer = false;
     private bool isInvincible = false;
     private LevelManager levelManager;
+    public GameObject deathSmoke;
     // Start is called before the first frame update
 
     void Start()
@@ -36,6 +37,7 @@ public class Health : MonoBehaviour
             else if(gameObject.tag == "Enemy")
             {
                 levelManager.numberOfEnemies--;
+                Instantiate(deathSmoke, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

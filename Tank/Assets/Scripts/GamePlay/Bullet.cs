@@ -83,6 +83,8 @@ public class Bullet : MonoBehaviour
     }
     IEnumerator ExplodeBeforeDestroy()
     {
+        //Desactivate the collider to avoid multiple collisions
+        GetComponent<Collider2D>().enabled = false;
         Debug.Log("Explode");
         rb.velocity = Vector2.zero;
         animator.SetTrigger("Explode");

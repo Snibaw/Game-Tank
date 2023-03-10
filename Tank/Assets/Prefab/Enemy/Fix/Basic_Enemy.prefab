@@ -410,6 +410,7 @@ MonoBehaviour:
   bullet_damage: 1
   life_time: 5
   timeBetweenDobleShots: 0.2
+  maxBounces: 0
   isDobleShot: 0
   isTripleShot: 0
   isLaser: 0
@@ -426,6 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifes: 1
+  deathSmoke: {fileID: 5466227088994621976, guid: 62edf6b3a671d3f4e8ebf7d08f8767c7, type: 3}
 --- !u!1 &8149724546565092195
 GameObject:
   m_ObjectHideFlags: 0
