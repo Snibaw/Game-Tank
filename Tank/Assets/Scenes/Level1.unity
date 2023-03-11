@@ -543,25 +543,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67fe82cca2af6e64785ed5b1e76181c0, type: 3}
---- !u!1 &683301034 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3533449222175923613, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
-  m_PrefabInstance: {fileID: 3533449221321095806}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &683301038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683301034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 911a1763d5d9bce43a9d3cde0554d100, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tireTrackPrefab: {fileID: 466104037934441602, guid: a0bc596fcb5804d46a3edfe65366ab62, type: 3}
-  tireTrackSpawnTimer: 0.15
 --- !u!1 &1001640979
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,6 +848,10 @@ PrefabInstance:
       propertyPath: bomb_prefab
       value: 
       objectReference: {fileID: 8578409086245453725, guid: 8f70bbcf7ce13c74a9335b5ef78583a2, type: 3}
+    - target: {fileID: 683301038, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
+      propertyPath: engineSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 40b883f001c1b1e408ecf100f8b4729d, type: 3}
     - target: {fileID: 3533449221558055053, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
       propertyPath: m_RootOrder
       value: 2
