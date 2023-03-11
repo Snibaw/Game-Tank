@@ -147,3 +147,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5c1342f1ada409b4c9c7b9b6f02c5ba9, type: 3}
   musicGamePlay:
   - {fileID: 8300000, guid: 6e5c118355150cb4c9708b62bbfd71a1, type: 3}
+  soundEffectMixer: {fileID: 7477525315871060095, guid: e4ddc070062707448a85299d5931dbbf, type: 2}

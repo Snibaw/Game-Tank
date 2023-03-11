@@ -6,7 +6,9 @@ UI : https://pzuh.itch.io/free-fantasy-game-gui
 MUSIC MENU : https://opengameart.org/content/battle-theme-a
 MUSIC MENU : https://opengameart.org/content/battle-theme-b-for-rpg
 MUSIC GAMEPLAY : https://opengameart.org/content/boss-battle-music 
-
+ENGINE SOUND : https://opengameart.org/content/engine-loop-heavy-vehicletank
+SHOOTING SOUND : https://opengameart.org/content/synthesized-explosion
+BOMB EXPLOSION : Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6288">Pixabay</a>
 
 //MUSIC MENU : https://opengameart.org/content/last-minute
 //SHOP MENU : https://opengameart.org/content/coffee-brewed-in-times-of-war

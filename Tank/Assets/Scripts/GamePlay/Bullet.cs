@@ -14,6 +14,8 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 startPosition;
     private Animator animator;
+    public AudioClip shootingSound;
+    public AudioClip bulletHitSound;
     // Boucing
     Vector2 lastVelocity;
     // Start is called before the first frame update
@@ -24,6 +26,7 @@ public class Bullet : MonoBehaviour
         rb.velocity = transform.right * speed;
         startPosition = transform.position;
         transform.Rotate(0, 0, 90);
+        AudioManager.instance.PlayClipAt(shootingSound, transform.position);
     }
 
     // Update is called once per frame
@@ -83,6 +86,7 @@ public class Bullet : MonoBehaviour
     }
     IEnumerator ExplodeBeforeDestroy()
     {
+        AudioManager.instance.PlayClipAt(bulletHitSound, transform.position);
         //Desactivate the collider to avoid multiple collisions
         GetComponent<Collider2D>().enabled = false;
         Debug.Log("Explode");

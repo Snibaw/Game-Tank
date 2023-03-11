@@ -24,15 +24,21 @@ namespace Player
         [SerializeField] private float damage = 1f;
         [SerializeField] private int life_time = 50;
         [SerializeField] private float bombDelay = 3f;
+        private LevelManager levelManager;
         // Start is called before the first frame update
         void Start()
         {
             tankCollider = gameObject.GetComponentInChildren<Collider2D>();
+            levelManager = GameObject.FindGameObjectsWithTag("LevelManager")[0].GetComponent<LevelManager>();
         }
 
         // Update is called once per frame
         void Update()
         {
+            if(levelManager.isPaused)
+            {
+                return;
+            }
             ShootManagement();
             BombManagement();
             

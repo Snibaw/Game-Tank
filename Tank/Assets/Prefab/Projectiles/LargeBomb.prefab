@@ -110,6 +110,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7a0d01884b2232b40803658daf8482d2, type: 2}
   - {fileID: 11400000, guid: 52d177a23718c0248a877a2df4b92bb5, type: 2}
   - {fileID: 11400000, guid: 1dd94ebe6e047ad46a5e6fa7d7a16c41, type: 2}
+  bombExplosion: {fileID: 8300000, guid: 4889c4bf3a1f05e4daefac1f566e94f1, type: 3}
 --- !u!95 &395340228353811843
 Animator:
   serializedVersion: 5

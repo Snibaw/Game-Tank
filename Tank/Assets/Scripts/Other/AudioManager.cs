@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -10,6 +11,18 @@ public class AudioManager : MonoBehaviour
     private AudioClip[] audioClips;
     private AudioSource audioSource;
     private int index = 0;
+    public AudioMixerGroup soundEffectMixer;
+    
+    public static AudioManager instance;
+    private void Awake() 
+    {
+        if(instance != null)
+        {
+            Debug.LogWarning("More than one instance of AudioManager found!");
+            return;
+        }
+        instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -39,5 +52,16 @@ public class AudioManager : MonoBehaviour
         index = (index + 1) % audioClips.Length;
         audioSource.clip = audioClips[index];
         audioSource.Play();
+    }
+    public AudioSource PlayClipAt(AudioClip clip, Vector3 pos)
+    {
+        GameObject tempGO = new GameObject("TempAudio"); // create the temp object
+        tempGO.transform.position = pos; // set its position
+        AudioSource audioSource = tempGO.AddComponent<AudioSource>(); // add an audio source
+        audioSource.clip = clip; // define the clip
+        audioSource.outputAudioMixerGroup = soundEffectMixer;
+        audioSource.Play(); // start the sound
+        Destroy(tempGO, clip.length); // destroy object after clip duration
+        return audioSource; // return the AudioSource reference
     }
 }

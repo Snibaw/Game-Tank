@@ -19,6 +19,7 @@ public class BombBehaviour : MonoBehaviour
     private Animator bombAnimator;
     private bool bottomObstacleDestroyed = false;
     private bool topObstacleDestroyed = false;
+    public AudioClip bombExplosion;
     
     /**
      * This script is used to destroy the bomb and the tiles around it
@@ -46,6 +47,7 @@ public class BombBehaviour : MonoBehaviour
         yield return new WaitForSeconds(explosionTime-0.5f);
         bombAnimator.SetTrigger("exploding");
         yield return new WaitForSeconds(0.2f);
+        AudioManager.instance.PlayClipAt(bombExplosion, transform.position);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
         foreach(Collider2D collider in colliders)
         {

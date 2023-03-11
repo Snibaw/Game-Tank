@@ -7,6 +7,7 @@ public class TireTrackSpawner : MonoBehaviour
     public GameObject tireTrackPrefab;
     [SerializeField] private float tireTrackSpawnTimer = 0.15f;
     private float timer = 0f;
+    private float clipSoundTimer = 0f;
     private GameObject Parent;
     private Vector3 lastPosition;
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class TireTrackSpawner : MonoBehaviour
     void Update()
     {
         timer-= Time.deltaTime;
+        clipSoundTimer -= Time.deltaTime;
         if(lastPosition != Parent.transform.position)
         {
             lastPosition = Parent.transform.position;

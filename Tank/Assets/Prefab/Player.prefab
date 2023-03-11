@@ -143,6 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifes: 3
+  deathSmoke: {fileID: 0}
 --- !u!114 &3533449221321095808
 MonoBehaviour:
   m_ObjectHideFlags: 0
