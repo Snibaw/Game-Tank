@@ -7,13 +7,17 @@ public class PlayerData
 {
     public int level;
     public int money;
-    public int life;
     public int hightScoreLevel;
+    public int[] nbr_stars = new int[50];
     public PlayerData(PlayerStats playerStats)
     {
         level = playerStats.level;
         money = playerStats.money;
-        life = playerStats.life;
         hightScoreLevel = playerStats.hightScoreLevel;
+    
+        for(int i = 0; i < 50; i++)
+        {
+            nbr_stars[i] = playerStats.nbr_stars[i];
+        }
     }
 }

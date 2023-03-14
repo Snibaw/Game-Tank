@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     private GameObject[] lifeUI;
     private Health playerHealth;
     private Scene scene;
+    public GameObject[] stars;
     
     public GameObject settingsWindow;
     
@@ -34,10 +35,10 @@ public class LevelManager : MonoBehaviour
         level = int.Parse(scene.name.Substring(5));
         playerHealth = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Health>();
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
-        playerStats.LoadPlayer();
+        LoadPlayerStats();
         playerStats.level = level;
-        money = playerStats.money;
         lifeUI = GameObject.FindGameObjectsWithTag("LifeUI");
+        UpdateStarUI();
         UpdateLifeUI();
         Debug.Log("playerStats.level: " + playerStats.level+ "playerStats.hightScoreLevel: " + playerStats.hightScoreLevel);
         Debug.Log("money: " + money);
@@ -61,13 +62,20 @@ public class LevelManager : MonoBehaviour
         isEnd = true; // to prevent player from pressing escape after win
         isPaused = true; // to prevent player from rotation cannon after win
         TopText.text = "Level " + level + " Completed";
-        OpenPanel();
+        int lifesAfterWin = (int)playerHealth.lifes;
+        if(playerStats.nbr_stars[level-1] < lifesAfterWin)
+        {
+            playerStats.nbr_stars[level-1] = lifesAfterWin;
+        }
         if(playerStats.hightScoreLevel < playerStats.level+1)
         {
             playerStats.hightScoreLevel = playerStats.level+1;
         }
-        
         playerStats.SavePlayer();
+        
+        
+        
+        LoadPlayerStats();
         if(playerStats.hightScoreLevel > level)
         {
             NextLevelButton.interactable = true;
@@ -76,6 +84,8 @@ public class LevelManager : MonoBehaviour
         {
             NextLevelButton.interactable = false;
         }
+        UpdateStarUI();
+        OpenPanel();
         
     }
     public void LevelLose()
@@ -142,6 +152,8 @@ public class LevelManager : MonoBehaviour
     {
         playerStats.level = 1;
         playerStats.hightScoreLevel = 1;
+        playerStats.money = 0;
+        playerStats.nbr_stars = new int[50];
         playerStats.SavePlayer();
     }
     public void SettingsButton()
@@ -174,5 +186,32 @@ public class LevelManager : MonoBehaviour
                 lifeUI[i].GetComponent<Image>().color = Color.black;
             }
         }
+    }
+    private void UpdateStarUI()
+    {
+        for(int i = 0; i < stars.Length; i++)
+        {
+            if(i < playerStats.nbr_stars[level-1])
+            {
+                stars[i].SetActive(true);
+            }
+            else
+            {
+                stars[i].SetActive(false);
+            }
+        }
+    }
+    public void OneEnemyDie()
+    {
+        numberOfEnemies--;
+        if(playerStats.nbr_stars[level-1] == 0)
+        {
+            playerStats.money += 10;
+        }
+    }
+    private void LoadPlayerStats()
+    {
+        playerStats.LoadPlayer();
+        money = playerStats.money;
     }
 }
