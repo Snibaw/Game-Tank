@@ -36,7 +36,7 @@ public class Health : MonoBehaviour
             }
             else if(gameObject.tag == "Enemy")
             {
-                levelManager.numberOfEnemies--;
+                levelManager.OneEnemyDie();
                 Instantiate(deathSmoke, transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }

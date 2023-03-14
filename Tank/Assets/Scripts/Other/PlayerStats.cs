@@ -6,8 +6,8 @@ public class PlayerStats : MonoBehaviour
 {
     public int level = 0;
     public int money = 0;
-    public int life = 0;
     public int hightScoreLevel = 0;
+    public int[] nbr_stars = new int[50];
     
     public void SavePlayer()
     {
@@ -16,9 +16,13 @@ public class PlayerStats : MonoBehaviour
     public void LoadPlayer()
     {
         PlayerData data = SaveSystem.LoadPlayer();
+        
         level = data.level;
         money = data.money;
-        life = data.life;
         hightScoreLevel = data.hightScoreLevel;
+        for (int i = 0; i < 50; i++)
+        {
+            nbr_stars[i] = data.nbr_stars[i];
+        }
     }
 }
