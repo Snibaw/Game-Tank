@@ -39,6 +39,11 @@ namespace Player
         }
         private void FixedUpdate() 
         {
+            if(horizontal != 0 && vertical != 0)
+            {
+                horizontal /= 1.414f;
+                vertical /= 1.414f;
+            }
             // Transform input into movement
             transform.Translate(Vector2.right * horizontal * speed * Time.deltaTime);
             transform.Translate(Vector2.up * vertical * speed * Time.deltaTime);
