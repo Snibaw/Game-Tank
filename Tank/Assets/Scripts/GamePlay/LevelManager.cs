@@ -148,12 +148,17 @@ public class LevelManager : MonoBehaviour
 	{
 		SceneManager.LoadScene("LevelSelect");
 	}
+    public void Shop()
+	{
+		SceneManager.LoadScene("Shop");
+	}
     public void ResetSave()
     {
         playerStats.level = 1;
         playerStats.hightScoreLevel = 1;
         playerStats.money = 0;
         playerStats.nbr_stars = new int[50];
+        playerStats.Upgrades = new int[10];
         playerStats.SavePlayer();
     }
     public void SettingsButton()
