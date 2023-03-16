@@ -18,16 +18,11 @@ public class ShopManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         buyButton.interactable = false;
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         playerStats.LoadPlayer();
     
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     public void SelectButton(int index)
     {

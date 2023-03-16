@@ -158,6 +158,7 @@ public class LevelManager : MonoBehaviour
         playerStats.hightScoreLevel = 1;
         playerStats.money = 0;
         playerStats.nbr_stars = new int[50];
+        playerStats.Upgrades = new int[10];
         playerStats.SavePlayer();
     }
     public void SettingsButton()
