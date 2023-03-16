@@ -148,6 +148,10 @@ public class LevelManager : MonoBehaviour
 	{
 		SceneManager.LoadScene("LevelSelect");
 	}
+    public void Shop()
+	{
+		SceneManager.LoadScene("Shop");
+	}
     public void ResetSave()
     {
         playerStats.level = 1;
