@@ -14,7 +14,8 @@ public class ShopManager : MonoBehaviour
     public Button buyButton;
     private int indexButtonSelected = -1;
     private PlayerStats playerStats;
-    private GameObject[] upgradeButtons;
+    public TextMeshProUGUI moneyText;
+    public Button[] upgradeButtons;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +23,25 @@ public class ShopManager : MonoBehaviour
         buyButton.interactable = false;
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         playerStats.LoadPlayer();
-    
+        
+        moneyText.text = playerStats.money.ToString();
+        
+        for(int i = 0; i < upgradeButtons.Length; i++)
+        {
+            if(upgradeCost.Length > i) 
+            {
+                upgradeButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = upgradeCost[i].ToString();
+            }
+            else
+            {
+                upgradeButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "Null";
+                upgradeButtons[i].interactable = false;
+            }
+            if(playerStats.Upgrades[i] == 1)
+            {
+                upgradeButtons[i].interactable = false;
+            }
+        }
     }
     public void SelectButton(int index)
     {
@@ -53,5 +72,13 @@ public class ShopManager : MonoBehaviour
     public void BuyUpgrade()
     {
         buyButton.interactable = false;
+        playerStats.money -= upgradeCost[indexButtonSelected];
+        playerStats.Upgrades[indexButtonSelected] = 1;
+        playerStats.SavePlayer();
+        playerStats.LoadPlayer();
+        
+        moneyText.text = playerStats.money.ToString();
+        
+        upgradeButtons[indexButtonSelected].interactable = false;
     }
 }
