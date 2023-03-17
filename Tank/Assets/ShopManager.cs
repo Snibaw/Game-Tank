@@ -81,4 +81,9 @@ public class ShopManager : MonoBehaviour
         
         upgradeButtons[indexButtonSelected].interactable = false;
     }
+    //Test function
+    public void SavePlayer()
+    {
+        playerStats.SavePlayer();
+    }
 }

@@ -12,9 +12,11 @@ namespace Player
         [SerializeField] private float reloadDelay = 1f;
         private bool canShoot = true;
         private bool canBomb = true;
+        private int maxBounces =  0;
         private Collider2D tankCollider;
         private float currentDelayShoot = 0;
         private float currentDelayBomb = 0;
+        private PlayerStats playerStats;
         
         // For the bullet
         [SerializeField] private string tag = "Enemy";
@@ -30,6 +32,18 @@ namespace Player
         {
             tankCollider = gameObject.GetComponentInChildren<Collider2D>();
             levelManager = GameObject.FindGameObjectsWithTag("LevelManager")[0].GetComponent<LevelManager>();
+            
+            playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
+            playerStats.LoadPlayer();
+            if(playerStats.Upgrades[0] == 1)
+            {
+                speed = speed * 1.5f;
+            }
+            if(playerStats.Upgrades[1] == 1)
+            {
+                canBounce = true;
+                maxBounces = 1;
+            }
         }
 
         // Update is called once per frame
@@ -64,7 +78,7 @@ namespace Player
                         Quaternion bullet_rotation = Quaternion.Euler(0, 0, barrel.rotation.eulerAngles.z + 90);
                         GameObject bullet = Instantiate(bulletPrefab, barrel.position, bullet_rotation);
                         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), tankCollider);
-                        bullet.GetComponent<Bullet>().Initialise(damage, speed, max_distance,life_time ,canBounce, tag);
+                        bullet.GetComponent<Bullet>().Initialise(damage, speed, max_distance,life_time ,canBounce, tag, maxBounces);
                     }
                 }
             }
