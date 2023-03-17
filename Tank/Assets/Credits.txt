@@ -10,6 +10,14 @@ ENGINE SOUND : https://opengameart.org/content/engine-loop-heavy-vehicletank
 SHOOTING SOUND : https://opengameart.org/content/synthesized-explosion
 BOMB EXPLOSION : Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=6288">Pixabay</a>
 
+ICONS :
+Bullet : <a href="https://www.flaticon.com/free-icons/crime-investigation" title="crime investigation icons">Crime investigation icons created by Vectorslab - Flaticon</a>
+Timer : <a href="https://www.flaticon.com/free-icons/timer" title="timer icons">Timer icons created by fjstudio - Flaticon</a>
+Arrow : <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arrow icons">Down arrow icons created by Handicon - Flaticon</a>
+Explosion : <a href="https://www.flaticon.com/free-icons/explosion" title="explosion icons">Explosion icons created by PIXARTIST - Flaticon</a>
+Damage : <a href="https://www.flaticon.com/free-icons/damage" title="damage icons">Damage icons created by Febrian Hidayat - Flaticon</a>
+Plus : <a href="https://www.flaticon.com/free-icons/plus" title="plus icons">Plus icons created by Freepik - Flaticon</a>
+
 //MUSIC MENU : https://opengameart.org/content/last-minute
 //SHOP MENU : https://opengameart.org/content/coffee-brewed-in-times-of-war
 //FIGHT MENU : https://opengameart.org/content/jammed-with-limbs

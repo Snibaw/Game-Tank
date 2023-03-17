@@ -27,9 +27,73 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2993914272747815791}
+  - {fileID: 4210227844433064376}
   m_Father: {fileID: 3533449223258137547}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2051440607284371459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2993914272747815791}
+  m_Layer: 0
+  m_Name: DobleBarrel1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2993914272747815791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051440607284371459}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 158802268}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2688266332823600258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4210227844433064376}
+  m_Layer: 0
+  m_Name: DobleBarrel2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4210227844433064376
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2688266332823600258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 158802268}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3533449221558055057
 GameObject:
@@ -118,8 +182,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4729983d147c3044fb3a1ab1d1da0262, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretBarrels:
-  - {fileID: 158802268}
+  barrel: {fileID: 158802268}
+  dobleBarrel:
+  - {fileID: 2993914272747815791}
+  - {fileID: 4210227844433064376}
   bulletPrefab: {fileID: 7276161061967019756, guid: 009ff4341ac4e4a4aac564644291e552, type: 3}
   bomb_prefab: {fileID: 8578409086245453725, guid: 8f70bbcf7ce13c74a9335b5ef78583a2, type: 3}
   reloadDelay: 1
@@ -160,6 +226,7 @@ MonoBehaviour:
   money: 0
   hightScoreLevel: 0
   nbr_stars: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  Upgrades: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &3533449221908703189
 GameObject:
   m_ObjectHideFlags: 0
