@@ -22,10 +22,10 @@ public class ShopManager : MonoBehaviour
         
         buyButton.interactable = false;
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
+        //ResetSave();
         playerStats.LoadPlayer();
         
         moneyText.text = playerStats.money.ToString();
-        
         for(int i = 0; i < upgradeButtons.Length; i++)
         {
             if(upgradeCost.Length > i) 
@@ -36,6 +36,12 @@ public class ShopManager : MonoBehaviour
             {
                 upgradeButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "Null";
                 upgradeButtons[i].interactable = false;
+            }
+            if(i == 1)
+            {
+                upgradeCost[1] = 200*(int)Mathf.Pow(2, playerStats.Upgrades[1]);
+                upgradeButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = upgradeCost[1].ToString();
+                continue;
             }
             if(playerStats.Upgrades[i] == 1)
             {
@@ -71,19 +77,47 @@ public class ShopManager : MonoBehaviour
     }
     public void BuyUpgrade()
     {
-        buyButton.interactable = false;
         playerStats.money -= upgradeCost[indexButtonSelected];
-        playerStats.Upgrades[indexButtonSelected] = 1;
+        playerStats.SavePlayer();
+        if(indexButtonSelected == 1)
+        {
+            playerStats.Upgrades[1] += 1;
+            upgradeCost[1] *= 2;
+            upgradeButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = (200*(int)Mathf.Pow(2, playerStats.Upgrades[1])).ToString();
+            if(playerStats.money >= upgradeCost[1])
+            {
+                buyButton.interactable = true;
+            }
+            else
+            {
+                buyButton.interactable = false;
+            }
+        }
+        else
+        {
+            buyButton.interactable = false;
+             upgradeButtons[indexButtonSelected].interactable = false;
+            playerStats.Upgrades[indexButtonSelected] = 1;
+        }
         playerStats.SavePlayer();
         playerStats.LoadPlayer();
         
         moneyText.text = playerStats.money.ToString();
         
-        upgradeButtons[indexButtonSelected].interactable = false;
+       
     }
     //Test function
     public void SavePlayer()
     {
+        playerStats.SavePlayer();
+    }
+        public void ResetSave()
+    {
+        playerStats.level = 1;
+        playerStats.hightScoreLevel = 1;
+        playerStats.money = 0;
+        playerStats.nbr_stars = new int[50];
+        playerStats.Upgrades = new int[10];
         playerStats.SavePlayer();
     }
 }
