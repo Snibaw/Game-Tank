@@ -35,6 +35,8 @@ namespace Player
         private float tripleShotSpread = 0f;
         private List<float> tripleShotSpreadList = new List<float> {0f, 45f, -45f};
         private float tripleShotTiming = 0.1f;
+        private float bombRadius = 2f;
+        private int bombDamage = 1;
         
         private LevelManager levelManager;
         // Start is called before the first frame update
@@ -105,7 +107,8 @@ namespace Player
                 {
                     canBomb = false;
                     currentDelayBomb = bombDelay;
-                    Instantiate(bomb_prefab, transform.position, Quaternion.identity);
+                    GameObject bomb = Instantiate(bomb_prefab, transform.position, Quaternion.identity);
+                    bomb.GetComponent<BombBehaviour>().Initialise(bombRadius, bombDamage);
                 }
             }
         }
@@ -191,6 +194,18 @@ namespace Player
             if(playerStats.Upgrades[7] == 1)
             {
                 damage = damage * 2f;
+            }
+            if(playerStats.Upgrades[8] == 1)
+            {
+                bombRadius = 3f;
+            }
+            if(playerStats.Upgrades[9] == 1)
+            {
+                bombDelay = bombDelay * 0.5f;
+            }
+            if(playerStats.Upgrades[10] == 1)
+            {
+                bombDamage = 2;
             }
         }
     }

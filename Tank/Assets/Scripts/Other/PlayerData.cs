@@ -9,7 +9,7 @@ public class PlayerData
     public int money;
     public int hightScoreLevel;
     public int[] nbr_stars = new int[50];
-    public int[] Upgrades = new int[10];
+    public int[] Upgrades = new int[15];
     public PlayerData(PlayerStats playerStats)
     {
         level = playerStats.level;
@@ -20,7 +20,7 @@ public class PlayerData
         {
             nbr_stars[i] = playerStats.nbr_stars[i];
         }
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
         {
             Upgrades[i] = playerStats.Upgrades[i];
         }
