@@ -17,6 +17,7 @@ Arrow : <a href="https://www.flaticon.com/free-icons/down-arrow" title="down arr
 Explosion : <a href="https://www.flaticon.com/free-icons/explosion" title="explosion icons">Explosion icons created by PIXARTIST - Flaticon</a>
 Damage : <a href="https://www.flaticon.com/free-icons/damage" title="damage icons">Damage icons created by Febrian Hidayat - Flaticon</a>
 Plus : <a href="https://www.flaticon.com/free-icons/plus" title="plus icons">Plus icons created by Freepik - Flaticon</a>
+Bomb : <a href="https://www.flaticon.com/fr/icones-gratuites/bombe" title="bombe icônes">Bombe icônes créées par deemakdaksina - Flaticon</a>
 
 //MUSIC MENU : https://opengameart.org/content/last-minute
 //SHOP MENU : https://opengameart.org/content/coffee-brewed-in-times-of-war

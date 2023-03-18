@@ -18,6 +18,8 @@ public class BombBehaviour : MonoBehaviour
     private List<Vector3Int> tileObstacleHorizontalPosition; // the position of the tile appartening to a horizontal obstacle
     private Animator bombAnimator;
     public AudioClip bombExplosion;
+    private float bombRadius = 2f;
+    private int bombDamage = 1;
     
     /**
      * This script is used to destroy the bomb and the tiles around it
@@ -46,7 +48,7 @@ public class BombBehaviour : MonoBehaviour
         bombAnimator.SetTrigger("exploding");
         yield return new WaitForSeconds(0.2f);
         AudioManager.instance.PlayClipAt(bombExplosion, transform.position);
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, bombRadius);
         foreach(Collider2D collider in colliders)
         {
             if(collider.tag == avoidTag) // If the collider is an enemy and the bomb is an enemy bomb, don't damage the enemy
@@ -55,7 +57,7 @@ public class BombBehaviour : MonoBehaviour
             }
             if(collider.tag == "Player" || collider.tag == "Enemy")
             {
-                collider.GetComponentInParent<Health>().TakeDamage(1f);
+                collider.GetComponentInParent<Health>().TakeDamage(bombDamage);
             }
             if(collider.tag == "Obstacle")
             {
@@ -180,5 +182,10 @@ public class BombBehaviour : MonoBehaviour
                 }
             }
         }
+    }
+    public void Initialise(float bombRadius, int bombDamage)
+    {
+        this.bombRadius = bombRadius;
+        this.bombDamage = bombDamage;
     }
 }

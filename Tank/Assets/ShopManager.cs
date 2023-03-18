@@ -22,7 +22,6 @@ public class ShopManager : MonoBehaviour
         
         buyButton.interactable = false;
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
-        //ResetSave();
         playerStats.LoadPlayer();
         
         moneyText.text = playerStats.money.ToString();
@@ -117,7 +116,7 @@ public class ShopManager : MonoBehaviour
         playerStats.hightScoreLevel = 1;
         playerStats.money = 0;
         playerStats.nbr_stars = new int[50];
-        playerStats.Upgrades = new int[10];
+        playerStats.Upgrades = new int[15];
         playerStats.SavePlayer();
     }
 }
