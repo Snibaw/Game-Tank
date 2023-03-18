@@ -433,25 +433,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &683301034 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3533449222175923613, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
-  m_PrefabInstance: {fileID: 3533449221321095806}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &683301038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683301034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 911a1763d5d9bce43a9d3cde0554d100, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tireTrackPrefab: {fileID: 466104037934441602, guid: a0bc596fcb5804d46a3edfe65366ab62, type: 3}
-  tireTrackSpawnTimer: 0.15
 --- !u!1001 &933559395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1480,10 +1461,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 375409401, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
-      propertyPath: bomb_prefab
-      value: 
-      objectReference: {fileID: 8578409086245453725, guid: 8f70bbcf7ce13c74a9335b5ef78583a2, type: 3}
     - target: {fileID: 3533449221558055053, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1528,58 +1505,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3533449221558055054, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
-      propertyPath: m_Interpolate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3533449221558055054, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3533449221558055057, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3533449222175923611, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3533449222175923611, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3533449222175923611, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7456349772730493293, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
-      propertyPath: trackPrefab
-      value: 
-      objectReference: {fileID: 3623228441107053905, guid: a395ad4efd19b6d4e9bbb9dcade543bd, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
---- !u!1 &3533449221321095807 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3533449221558055057, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
-  m_PrefabInstance: {fileID: 3533449221321095806}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3533449221321095808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3533449221321095807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b41c0b24680c2f4991ce0fe7f8c7cfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 0
-  money: 0
-  hightScoreLevel: 0
-  nbr_stars: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  Upgrades: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1001 &4499989000635737158
 PrefabInstance:
   m_ObjectHideFlags: 0

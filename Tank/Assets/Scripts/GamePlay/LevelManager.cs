@@ -35,6 +35,7 @@ public class LevelManager : MonoBehaviour
         level = int.Parse(scene.name.Substring(5));
         playerHealth = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Health>();
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
+        //ResetSave();
         LoadPlayerStats();
         playerStats.level = level;
         lifeUI = GameObject.FindGameObjectsWithTag("LifeUI");
@@ -158,7 +159,7 @@ public class LevelManager : MonoBehaviour
         playerStats.hightScoreLevel = 1;
         playerStats.money = 0;
         playerStats.nbr_stars = new int[50];
-        playerStats.Upgrades = new int[10];
+        playerStats.Upgrades = new int[15];
         playerStats.SavePlayer();
     }
     public void SettingsButton()

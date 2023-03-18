@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     public int money = 0;
     public int hightScoreLevel = 0;
     public int[] nbr_stars = new int[50];
-    public int[] Upgrades = new int[10];
+    public int[] Upgrades = new int[15];
     
     public void SavePlayer()
     {
@@ -25,7 +25,7 @@ public class PlayerStats : MonoBehaviour
         {
             nbr_stars[i] = data.nbr_stars[i];
         }
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 15; i++)
         {
             Upgrades[i] = data.Upgrades[i];
         }
