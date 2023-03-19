@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
         level = int.Parse(scene.name.Substring(5));
         playerHealth = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Health>();
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
-        //ResetSave();
+        ResetSave();
         LoadPlayerStats();
         playerStats.level = level;
         lifeUI = GameObject.FindGameObjectsWithTag("LifeUI");

@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MortarExplosion : MonoBehaviour
+public class MortarExplosion2 : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
@@ -16,12 +15,9 @@ public class MortarExplosion : MonoBehaviour
     {
         
     }
-    public void EndOfAnimation()
+
+    void EndOfAnimation()
     {
-
         Destroy(gameObject);
-        // Destroy Object
     }
-
 }
- 

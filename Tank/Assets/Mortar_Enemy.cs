@@ -10,10 +10,13 @@ public class Mortar_Enemy : MonoBehaviour
     private Vector3 playerOldPosition;
     private Vector3 playerNewPosition;
     public GameObject mortarExplosion;
+    public GameObject mortarTarget;
+    public GameObject mortarExplosion2;
     AudioSource boomSound;
     // Start is called before the first frame update
+    [SerializeField] public GameObject player;
     [SerializeField] public static float reloadTime = 5f;
-    [SerializeField] private float explosionTime = 1f;
+    [SerializeField] public static float explosionTime = 1f;
     [SerializeField] private float explosionRadius = 2f;
     [SerializeField] private float damage = 1f;
     [SerializeField] private AudioClip blastOffSound;
@@ -36,20 +39,22 @@ public class Mortar_Enemy : MonoBehaviour
         {
             timerExplosion = explosionTime;
             timerReload = reloadTime;
-            playerOldPosition = GameObject.Find("Player").transform.position;
+            playerOldPosition = player.transform.position;
+            Instantiate(mortarTarget, playerOldPosition, Quaternion.identity);
             Instantiate(mortarExplosion, transform.position, Quaternion.identity);
             activeExplosions++;
             boomSound.PlayOneShot(blastOffSound);
         }
         if(timerExplosion <= 0 && activeExplosions > 0)
         {
-            Instantiate(mortarExplosion, playerOldPosition, Quaternion.identity);
+            Instantiate(mortarExplosion2, playerOldPosition, Quaternion.identity);
             activeExplosions--;
-            playerNewPosition = GameObject.Find("Player").transform.position;
+            playerNewPosition = player.transform.position;
             boomSound.PlayOneShot(landSound);
             if(Math.Sqrt(Math.Pow(playerOldPosition.x - playerNewPosition.x, 2) + Math.Pow(playerOldPosition.y - playerNewPosition.y, 2)) < explosionRadius)
             {
-                GameObject.Find("Player").GetComponent<Health>().TakeDamage(damage);
+                Debug.Log("Player hit");
+                player.GetComponent<Health>().TakeDamage(damage);
             }
         }
     }

@@ -84,7 +84,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mortarExplosion: {fileID: 2691834247485761613, guid: 3ced6fa9ab1d0a64ba97ba35e51d6b96, type: 3}
-  explosionTime: 1
+  mortarTarget: {fileID: 6835555123616330489, guid: ff9a9e65ba25a1b4bb045fef0258a289, type: 3}
+  mortarExplosion2: {fileID: 7926788905137997379, guid: 08eb21624c0625f42876ee10b8434a9a, type: 3}
+  player: {fileID: 0}
   explosionRadius: 1
   damage: 1
   blastOffSound: {fileID: 8300000, guid: f7177868f1c3c094e85c4501a9de75c3, type: 3}

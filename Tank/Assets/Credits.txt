@@ -20,6 +20,8 @@ Damage : <a href="https://www.flaticon.com/free-icons/damage" title="damage icon
 Plus : <a href="https://www.flaticon.com/free-icons/plus" title="plus icons">Plus icons created by Freepik - Flaticon</a>
 Bomb : <a href="https://www.flaticon.com/fr/icones-gratuites/bombe" title="bombe icônes">Bombe icônes créées par deemakdaksina - Flaticon</a>
 
+Target Mortar : <a href="https://www.flaticon.com/free-icons/gun-target" title="gun target icons">Gun target icons created by Freepik - Flaticon</a>
+
 //MUSIC MENU : https://opengameart.org/content/last-minute
 //SHOP MENU : https://opengameart.org/content/coffee-brewed-in-times-of-war
 //FIGHT MENU : https://opengameart.org/content/jammed-with-limbs
