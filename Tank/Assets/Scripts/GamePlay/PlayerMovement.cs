@@ -42,8 +42,8 @@ namespace Player
         {
             if(horizontal != 0 && vertical != 0)
             {
-                horizontal /= 1.414f;
-                vertical /= 1.414f;
+                horizontal /= (float)System.Math.Sqrt(System.Math.Pow(horizontal, 2) + System.Math.Pow(vertical, 2));
+                vertical /= (float)System.Math.Sqrt(System.Math.Pow(horizontal, 2) + System.Math.Pow(vertical, 2));
             }
             // Transform input into movement
             transform.Translate(Vector2.right * horizontal * speed * Time.deltaTime);
