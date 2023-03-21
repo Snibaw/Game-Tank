@@ -7,13 +7,19 @@ using UnityEngine.UI;
 
 public class LevelSelector : MonoBehaviour
 {
+    public GameObject[] Panel;
+    public Button[] ButtonPanel;
     public Sprite LockButtonImage;
     public Button[] levelButtons;
     private PlayerStats playerStats;
     private GameObject[] button_Stars;
     private int[] nbr_stars = new int[50];
+    private int activePanel = 0;
     private void Start()
     {
+        //Panel
+        ChangePanel(0);        
+        
         //PlayerStats
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         playerStats.LoadPlayer();
@@ -57,6 +63,23 @@ public class LevelSelector : MonoBehaviour
             else
             {
                 button_Stars[j].GetComponent<Image>().color = Color.black;
+            }
+        }
+    }
+    public void ChangePanel(int indexPanel)
+    {
+        activePanel = indexPanel;
+        for(int i = 0; i < Panel.Length; i++)
+        {
+            if (i == indexPanel)
+            {
+                Panel[i].SetActive(true);
+                ButtonPanel[i].interactable = false;
+            }
+            else
+            {
+                Panel[i].SetActive(false);
+                ButtonPanel[i].interactable = true;
             }
         }
     }
