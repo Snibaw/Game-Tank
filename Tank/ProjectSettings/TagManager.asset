@@ -12,6 +12,7 @@ TagManager:
   - Bullet
   - LifeUI
   - UpgradeButton
+  - Shield
   layers:
   - Default
   - TransparentFX
