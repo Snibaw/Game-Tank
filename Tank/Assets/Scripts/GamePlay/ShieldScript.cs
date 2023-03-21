@@ -6,17 +6,19 @@ using UnityEngine;
 
 public class ShieldScript : MonoBehaviour
 {
-    public GameObject attachedTank;
-    Vector3 delay;
+    GameObject attachedTank;
     // Start is called before the first frame update
     void Start()
     {
-        delay = transform.position - attachedTank.transform.position;
+        attachedTank = GetComponent<FixedJoint2D>().connectedBody.gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = attachedTank.transform.position + delay;
+        if(attachedTank == false)
+        {
+            Destroy(gameObject);
+        }
     }
 }
