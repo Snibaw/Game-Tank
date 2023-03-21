@@ -15,7 +15,9 @@ public class LevelSelector : MonoBehaviour
     private PlayerStats playerStats;
     private GameObject[] button_Stars;
     private int[] nbr_stars = new int[50];
+    private int[] nbr_starsHard = new int[50];
     private int highscore;
+    private int highscoreHard;
     private void Start()
     {
         //Panel
@@ -26,9 +28,11 @@ public class LevelSelector : MonoBehaviour
         playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         playerStats.LoadPlayer();
         highscore = playerStats.hightScoreLevel;
+        highscoreHard = playerStats.highScoreLevelHard;
         for (int i = 0; i < 50; i++)
         {
             nbr_stars[i] = playerStats.nbr_stars[i];
+            nbr_starsHard[i] = playerStats.nbr_starsHard[i];
         }
         
         //Lock Button
@@ -64,7 +68,7 @@ public class LevelSelector : MonoBehaviour
             button_Stars = levelHardButtons[i].GetComponent<StarContainer>().GetStar();
             for (int j = 0; j < button_Stars.Length; j++)
             {
-                if (j < nbr_stars[i])
+                if (j < nbr_starsHard[i])
                 {
                     button_Stars[j].GetComponent<Image>().color = Color.white;
                 }
@@ -110,7 +114,7 @@ public class LevelSelector : MonoBehaviour
         for (int i = 0; i < levelHardButtons.Length; i++)
 		{
             levelHardButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = (i + 1).ToString();
-			if (i + 1 > highscore)
+			if (i + 1 > highscoreHard)
 			{
                 levelHardButtons[i].GetComponent<Image>().sprite = LockButtonImage;
                 levelHardButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
