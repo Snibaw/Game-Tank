@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private string tag = "Player";
+    [SerializeField] private string tag = "Player";
     private bool canBounce = false;
     private float speed = 10f;
     private float max_distance = 2f;
@@ -16,6 +16,7 @@ public class Bullet : MonoBehaviour
     private Animator animator;
     public AudioClip shootingSound;
     public AudioClip bulletHitSound;
+
     // Boucing
     Vector2 lastVelocity;
     // Start is called before the first frame update
@@ -40,6 +41,12 @@ public class Bullet : MonoBehaviour
         }
     }
     private void OnCollisionEnter2D(Collision2D other) { // If the bullet hits an enemy, destroy the bullet and damage the enemy
+        if(other.gameObject.tag == "Shield" && tag == "Enemy")
+        {
+            StartCoroutine(ExplodeBeforeDestroy());
+            Debug.Log("Hit Shield");
+            return;
+        }
         if(other.gameObject.tag == tag)
         {
             Debug.Log("Hit"+tag);
@@ -66,6 +73,11 @@ public class Bullet : MonoBehaviour
         else if(other.gameObject.tag == "Bullet")
         {
             StartCoroutine(ExplodeBeforeDestroy());
+        }
+        else if(other.gameObject.tag == "Shield" && tag == "Enemy")
+        {
+            StartCoroutine(ExplodeBeforeDestroy());
+            Debug.Log("Hit Shield");
         }
     }
     public void Initialise(float damage, float speed, float max_distance, int life_time, bool canBounce, string tag, int maxBounces = 0) // Initialise the bullet

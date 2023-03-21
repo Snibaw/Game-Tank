@@ -31,6 +31,7 @@ namespace Enemy
         }
         private void DetectPlayer()
         {
+
             RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position - transform.position); // Raycast from the tank to the player
             // If distance < maxrange
             if(Vector2.Distance(transform.position, player.transform.position) < maxrange)
