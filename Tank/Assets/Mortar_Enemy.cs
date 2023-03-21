@@ -13,14 +13,16 @@ public class Mortar_Enemy : MonoBehaviour
     public GameObject mortarTarget;
     public GameObject mortarExplosion2;
     AudioSource boomSound;
-    // Start is called before the first frame update
     [SerializeField] public GameObject player;
-    [SerializeField] public static float reloadTime = 5f;
-    [SerializeField] public static float explosionTime = 1f;
+    [SerializeField] private float reloadTime = 5f;
+    [SerializeField] private float explosionTime = 1f;
     [SerializeField] private float explosionRadius = 2f;
     [SerializeField] private float damage = 1f;
     [SerializeField] private AudioClip blastOffSound;
     [SerializeField] private AudioClip landSound;
+
+
+
 
     private float timerExplosion;
     void Start()
@@ -40,7 +42,8 @@ public class Mortar_Enemy : MonoBehaviour
             timerExplosion = explosionTime;
             timerReload = reloadTime;
             playerOldPosition = player.transform.position;
-            Instantiate(mortarTarget, playerOldPosition, Quaternion.identity);
+            GameObject target = Instantiate(mortarTarget, playerOldPosition, Quaternion.identity);
+            target.GetComponent<MortarTargetScript>().Initialise(explosionTime);
             Instantiate(mortarExplosion, transform.position, Quaternion.identity);
             activeExplosions++;
             boomSound.PlayOneShot(blastOffSound);

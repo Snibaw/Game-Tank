@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MortarTargetScript : MonoBehaviour
 {
-    private float explosionTime;
+    private float explosionTime  = 1f;
     // Start is called before the first frame update
     void Start()
     {
-        explosionTime = Mortar_Enemy.explosionTime;
+
     }
 
     // Update is called once per frame
@@ -19,5 +19,10 @@ public class MortarTargetScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Initialise(float explosionTime)
+    {
+        this.explosionTime = explosionTime;
     }
 }
