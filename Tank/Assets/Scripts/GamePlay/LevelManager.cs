@@ -25,10 +25,13 @@ public class LevelManager : MonoBehaviour
     public GameObject[] stars;
     
     public GameObject settingsWindow;
+    private string levelNameText;
+    private GameObject[] enemies;
     
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("DifficultyLevel.difficultyLevel: " + DifficultyLevel.difficultyLevel);
         isPaused = false;
         isEnd = false;
         scene = SceneManager.GetActiveScene();
@@ -39,6 +42,26 @@ public class LevelManager : MonoBehaviour
         LoadPlayerStats();
         playerStats.level = level;
         lifeUI = GameObject.FindGameObjectsWithTag("LifeUI");
+        
+        if(DifficultyLevel.difficultyLevel == 0) // Mode Easy
+        {
+            levelNameText = "Level " + level;
+        }
+        else // Mode Hard
+        {
+            levelNameText = "Level " + level + " Hard";
+            playerHealth.lifes = 1;
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject enemy in enemies)
+            {
+                Health enemyHealth = enemy.GetComponent<Health>();
+                if(enemyHealth != null)
+                {
+                    enemyHealth.lifes = enemyHealth.lifes +1;
+                }
+            }
+        }
+        
         UpdateStarUI();
         UpdateLifeUI();
         Debug.Log("playerStats.level: " + playerStats.level+ "playerStats.hightScoreLevel: " + playerStats.hightScoreLevel);
@@ -62,7 +85,7 @@ public class LevelManager : MonoBehaviour
     {
         isEnd = true; // to prevent player from pressing escape after win
         isPaused = true; // to prevent player from rotation cannon after win
-        TopText.text = "Level " + level + " Completed";
+        TopText.text = levelNameText + " Completed";
         int lifesAfterWin = (int)playerHealth.lifes;
         if(playerStats.nbr_stars[level-1] < lifesAfterWin)
         {
@@ -177,7 +200,7 @@ public class LevelManager : MonoBehaviour
         Panel.SetActive(true);
         MoneyText.text = money.ToString();
         LifeText.text = playerHealth.lifes.ToString();
-        MidText.text = "Level " + level;
+        MidText.text = levelNameText;
     }
     public void UpdateLifeUI()
     {
