@@ -25,10 +25,13 @@ public class LevelManager : MonoBehaviour
     public GameObject[] stars;
     
     public GameObject settingsWindow;
+    private string levelNameText;
+    private GameObject[] enemies;
     
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("DifficultyLevel.difficultyLevel: " + DifficultyLevel.difficultyLevel);
         isPaused = false;
         isEnd = false;
         scene = SceneManager.GetActiveScene();
@@ -39,9 +42,29 @@ public class LevelManager : MonoBehaviour
         LoadPlayerStats();
         playerStats.level = level;
         lifeUI = GameObject.FindGameObjectsWithTag("LifeUI");
+        
+        if(DifficultyLevel.difficultyLevel == 0) // Mode Easy
+        {
+            levelNameText = "Level " + level;
+        }
+        else // Mode Hard
+        {
+            levelNameText = "Level " + level + " Hard";
+            playerHealth.lifes = 1;
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach(GameObject enemy in enemies) // Add 1 hp to every enemies
+            {
+                Health enemyHealth = enemy.GetComponent<Health>();
+                if(enemyHealth != null)
+                {
+                    enemyHealth.lifes = enemyHealth.lifes +1;
+                }
+            }
+        }
+        
         UpdateStarUI();
         UpdateLifeUI();
-        Debug.Log("playerStats.level: " + playerStats.level+ "playerStats.hightScoreLevel: " + playerStats.hightScoreLevel);
+        Debug.Log("playerStats.level: " + playerStats.level+ "    playerStats.hightScoreLevel: " + playerStats.hightScoreLevel+ "    playerStats.highScoreLevelHard: " + playerStats.highScoreLevelHard);
         Debug.Log("money: " + money);
         Time.timeScale = 1;
     }
@@ -62,22 +85,42 @@ public class LevelManager : MonoBehaviour
     {
         isEnd = true; // to prevent player from pressing escape after win
         isPaused = true; // to prevent player from rotation cannon after win
-        TopText.text = "Level " + level + " Completed";
-        int lifesAfterWin = (int)playerHealth.lifes;
-        if(playerStats.nbr_stars[level-1] < lifesAfterWin)
+        TopText.text = levelNameText + " Completed";
+        
+        if(DifficultyLevel.difficultyLevel == 0) // Mode Easy
         {
-            playerStats.nbr_stars[level-1] = lifesAfterWin;
+            int lifesAfterWin = (int)playerHealth.lifes;
+            if(playerStats.nbr_stars[level-1] < lifesAfterWin)
+            {
+                playerStats.nbr_stars[level-1] = lifesAfterWin;
+            }
+            if(playerStats.hightScoreLevel < level+1)
+            {
+                playerStats.hightScoreLevel = level+1;
+            }
         }
-        if(playerStats.hightScoreLevel < playerStats.level+1)
+        else
         {
-            playerStats.hightScoreLevel = playerStats.level+1;
+            if(playerStats.nbr_starsHard[level-1] < 1)
+            {
+                playerStats.nbr_starsHard[level-1] = 1;
+            }
+            if(playerStats.highScoreLevelHard < level+1 )
+            {
+                playerStats.highScoreLevelHard = level+1;
+            }
         }
+        Debug.Log("playerStats.highScoreLevelHard: " + playerStats.highScoreLevelHard);
         playerStats.SavePlayer();
         
-        
-        
         LoadPlayerStats();
-        if(playerStats.hightScoreLevel > level)
+        Debug.Log("playerStats.highScoreLevelHard: AFTER" + playerStats.highScoreLevelHard);
+        int hightScoreTempo = playerStats.hightScoreLevel;
+        if(DifficultyLevel.difficultyLevel == 1) // Mode Hard
+        {
+            hightScoreTempo = playerStats.highScoreLevelHard;
+        }
+        if(hightScoreTempo > level)
         {
             NextLevelButton.interactable = true;
         }
@@ -115,6 +158,11 @@ public class LevelManager : MonoBehaviour
         {
             OpenPanel();
             TopText.text = "Pause";
+            int hightScoreTempo = playerStats.hightScoreLevel;
+            if(DifficultyLevel.difficultyLevel == 1) // Mode Hardactive
+            {
+                hightScoreTempo = playerStats.highScoreLevelHard;
+            }
             if(playerStats.hightScoreLevel > level)
             {
                 NextLevelButton.interactable = true;
@@ -157,8 +205,10 @@ public class LevelManager : MonoBehaviour
     {
         playerStats.level = 1;
         playerStats.hightScoreLevel = 1;
+        playerStats.highScoreLevelHard = 1;
         playerStats.money = 0;
         playerStats.nbr_stars = new int[50];
+        playerStats.nbr_starsHard = new int[50];
         playerStats.Upgrades = new int[15];
         playerStats.SavePlayer();
     }
@@ -177,7 +227,7 @@ public class LevelManager : MonoBehaviour
         Panel.SetActive(true);
         MoneyText.text = money.ToString();
         LifeText.text = playerHealth.lifes.ToString();
-        MidText.text = "Level " + level;
+        MidText.text = levelNameText;
     }
     public void UpdateLifeUI()
     {
@@ -195,25 +245,56 @@ public class LevelManager : MonoBehaviour
     }
     private void UpdateStarUI()
     {
-        for(int i = 0; i < stars.Length; i++)
+        if(DifficultyLevel.difficultyLevel == 0) // Mode Easy
         {
-            if(i < playerStats.nbr_stars[level-1])
+            for(int i = 0; i < stars.Length; i++)
             {
-                stars[i].SetActive(true);
+                if(i < playerStats.nbr_stars[level-1])
+                {
+                    stars[i].SetActive(true);
+                }
+                else
+                {
+                    stars[i].SetActive(false);
+                }
+            }
+        }
+        else // Mode Hard
+        {
+            if(playerStats.nbr_starsHard[level-1] == 1)
+            {
+                stars[0].SetActive(true);
+                stars[1].SetActive(true);
+                stars[2].SetActive(true);
             }
             else
             {
-                stars[i].SetActive(false);
+                stars[0].SetActive(false);
+                stars[1].SetActive(false);
+                stars[2].SetActive(false);
             }
         }
+        
+
     }
     public void OneEnemyDie()
     {
         numberOfEnemies--;
-        if(playerStats.nbr_stars[level-1] == 0)
+        if(DifficultyLevel.difficultyLevel == 0)
         {
-            playerStats.money += 10;
+            if(playerStats.nbr_stars[level-1] == 0)
+            {
+                playerStats.money += 10;
+            }
         }
+        else if(DifficultyLevel.difficultyLevel == 1)
+        {
+            if(playerStats.nbr_starsHard[level-1] == 0)
+            {
+                playerStats.money += 15;
+            }
+        }
+
     }
     private void LoadPlayerStats()
     {
