@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MortarTargetScript : MonoBehaviour
 {
-    private float explosionTime  = 1f;
+    private float explosionTime ;
     // Start is called before the first frame update
     void Start()
     {
