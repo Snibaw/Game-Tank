@@ -491,8 +491,8 @@ MonoBehaviour:
   - {fileID: 1041235005}
   - {fileID: 1587084627}
   - {fileID: 532770022}
-  - {fileID: 1318330449}
   - {fileID: 1797440445}
+  - {fileID: 1318330449}
   - {fileID: 719935298}
   - {fileID: 1432188184}
   - {fileID: 1478215159}
@@ -1968,7 +1968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3033,7 +3033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
       propertyPath: m_AnchorMax.x
@@ -3388,8 +3388,8 @@ RectTransform:
   - {fileID: 1041235004}
   - {fileID: 1587084626}
   - {fileID: 532770021}
-  - {fileID: 1318330450}
   - {fileID: 1797440444}
+  - {fileID: 1318330450}
   - {fileID: 484165845}
   - {fileID: 1432188183}
   - {fileID: 1478215158}
