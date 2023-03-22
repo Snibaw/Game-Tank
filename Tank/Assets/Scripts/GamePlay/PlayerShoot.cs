@@ -17,7 +17,6 @@ namespace Player
         private Collider2D tankCollider;
         private float currentDelayShoot = 0;
         private float currentDelayBomb = 0;
-        private PlayerStats playerStats;
         
         // For the bullet
         [SerializeField] private string tag = "Enemy";
@@ -28,6 +27,7 @@ namespace Player
         [SerializeField] private int life_time = 50;
         [SerializeField] private float bombDelay = 3f;
         // For Upgrade
+        public int[] Upgrades = new int[15];
         private int maxBounces =  0;
         private bool isDobleShot = false;
         private bool isDobleBarrel = false;
@@ -45,7 +45,6 @@ namespace Player
             tankCollider = gameObject.GetComponentInChildren<Collider2D>();
             levelManager = GameObject.FindGameObjectsWithTag("LevelManager")[0].GetComponent<LevelManager>();
             
-            playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
             InitUpgrade();
         }
 
@@ -161,51 +160,58 @@ namespace Player
         }
         private void InitUpgrade()
         {
-            playerStats.LoadPlayer();
-            if(playerStats.Upgrades[0] == 1)
+            GetPlayerPrefs();
+            if(Upgrades[0] == 1)
             {
                 speed = speed * 1.5f;
             }
-            if(playerStats.Upgrades[1] >= 1)
+            if(Upgrades[1] >= 1)
             {
                 canBounce = true;
-                maxBounces = playerStats.Upgrades[1];
+                maxBounces = Upgrades[1];
             }
-            if(playerStats.Upgrades[2] == 1)
+            if(Upgrades[2] == 1)
             {
                 isDobleShot = true;
             }
-            if(playerStats.Upgrades[3] == 1)
+            if(Upgrades[3] == 1)
             {
                 isDobleBarrel = true;
             }
-            if(playerStats.Upgrades[4] == 1)
+            if(Upgrades[4] == 1)
             {
                 isTripleShot = true;
             }
-            if(playerStats.Upgrades[5] == 1)
+            if(Upgrades[5] == 1)
             {
                 reloadDelay = reloadDelay * 0.5f;
             }
-            if(playerStats.Upgrades[6] == 1)
+            if(Upgrades[6] == 1)
             {
                 // Make bullet explode
             }
-            if(playerStats.Upgrades[7] == 1)
+            if(Upgrades[7] == 1)
             {
                 damage = damage * 2f;
             }
-            if(playerStats.Upgrades[8] == 1)
+            if(Upgrades[8] == 1)
             {
                 bombRadius = 3f;
             }
-            if(playerStats.Upgrades[9] == 1)
+            if(Upgrades[9] == 1)
             {
                 bombDelay = bombDelay * 0.5f;
             }
-            if(playerStats.Upgrades[10] == 1)
+            if(Upgrades[10] == 1)
             {
                 bombDamage = 2;
+            }
+        }
+        private void GetPlayerPrefs()
+        {
+            for(int i= 0; i < 15; i++)
+            {
+                Upgrades[i] = PlayerPrefs.GetInt("Upgrades" + i,0);
             }
         }
     }

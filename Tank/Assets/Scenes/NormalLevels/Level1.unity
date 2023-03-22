@@ -963,7 +963,8 @@ PrefabInstance:
       propertyPath: trackPrefab
       value: 
       objectReference: {fileID: 3623228441107053905, guid: a395ad4efd19b6d4e9bbb9dcade543bd, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3533449221321095808, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a3decaf8a899c040a569e5ae18e4fe2, type: 3}
 --- !u!1001 &4499989000635737158
 PrefabInstance:
