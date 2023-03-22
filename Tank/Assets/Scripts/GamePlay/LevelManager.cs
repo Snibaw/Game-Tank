@@ -7,10 +7,16 @@ using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
-    private PlayerStats playerStats;
+    //private PlayerStats playerStats;
+    
+    // PlayerPrefs Stats
+    private int nbr_stars = 0;
+    private int money = 0;
+    private int highscore = 0;
+
+    // Other
     public int numberOfEnemies;
     private int level;
-    private int money;
     public TextMeshProUGUI TopText;
     public TextMeshProUGUI MidText;
     public TextMeshProUGUI MoneyText;
@@ -31,16 +37,15 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("DifficultyLevel.difficultyLevel: " + DifficultyLevel.difficultyLevel);
         isPaused = false;
         isEnd = false;
         scene = SceneManager.GetActiveScene();
         level = int.Parse(scene.name.Substring(5));
         playerHealth = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Health>();
-        playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
+        //playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         //ResetSave();
-        LoadPlayerStats();
-        playerStats.level = level;
+        GetPlayerPrefs();
+        
         lifeUI = GameObject.FindGameObjectsWithTag("LifeUI");
         
         if(DifficultyLevel.difficultyLevel == 0) // Mode Easy
@@ -64,8 +69,6 @@ public class LevelManager : MonoBehaviour
         
         UpdateStarUI();
         UpdateLifeUI();
-        Debug.Log("playerStats.level: " + playerStats.level+ "    playerStats.hightScoreLevel: " + playerStats.hightScoreLevel+ "    playerStats.highScoreLevelHard: " + playerStats.highScoreLevelHard);
-        Debug.Log("money: " + money);
         Time.timeScale = 1;
     }
 
@@ -87,40 +90,21 @@ public class LevelManager : MonoBehaviour
         isPaused = true; // to prevent player from rotation cannon after win
         TopText.text = levelNameText + " Completed";
         
-        if(DifficultyLevel.difficultyLevel == 0) // Mode Easy
+        int lifesAfterWin = (int)playerHealth.lifes;
+        if(nbr_stars < lifesAfterWin)
         {
-            int lifesAfterWin = (int)playerHealth.lifes;
-            if(playerStats.nbr_stars[level-1] < lifesAfterWin)
-            {
-                playerStats.nbr_stars[level-1] = lifesAfterWin;
-            }
-            if(playerStats.hightScoreLevel < level+1)
-            {
-                playerStats.hightScoreLevel = level+1;
-            }
+            nbr_stars = lifesAfterWin;
         }
-        else
+        if(highscore < level+1)
         {
-            if(playerStats.nbr_starsHard[level-1] < 1)
-            {
-                playerStats.nbr_starsHard[level-1] = 1;
-            }
-            if(playerStats.highScoreLevelHard < level+1 )
-            {
-                playerStats.highScoreLevelHard = level+1;
-            }
+            highscore = level+1;
         }
-        Debug.Log("playerStats.highScoreLevelHard: " + playerStats.highScoreLevelHard);
-        playerStats.SavePlayer();
         
-        LoadPlayerStats();
-        Debug.Log("playerStats.highScoreLevelHard: AFTER" + playerStats.highScoreLevelHard);
-        int hightScoreTempo = playerStats.hightScoreLevel;
-        if(DifficultyLevel.difficultyLevel == 1) // Mode Hard
-        {
-            hightScoreTempo = playerStats.highScoreLevelHard;
-        }
-        if(hightScoreTempo > level)
+        SetPlayerPrefs();
+        
+        GetPlayerPrefs();
+        
+        if(highscore > level)
         {
             NextLevelButton.interactable = true;
         }
@@ -137,7 +121,7 @@ public class LevelManager : MonoBehaviour
         isPaused = true; // to prevent player from rotation cannon after lose
         isEnd = true; // to prevent player from pressing escape after lose
         OpenPanel();
-        if(playerStats.hightScoreLevel > level)
+        if(highscore > level)
         {
             NextLevelButton.interactable = true;
         }
@@ -158,12 +142,7 @@ public class LevelManager : MonoBehaviour
         {
             OpenPanel();
             TopText.text = "Pause";
-            int hightScoreTempo = playerStats.hightScoreLevel;
-            if(DifficultyLevel.difficultyLevel == 1) // Mode Hardactive
-            {
-                hightScoreTempo = playerStats.highScoreLevelHard;
-            }
-            if(playerStats.hightScoreLevel > level)
+            if(highscore > level)
             {
                 NextLevelButton.interactable = true;
             }
@@ -201,17 +180,7 @@ public class LevelManager : MonoBehaviour
 	{
 		SceneManager.LoadScene("Shop");
 	}
-    public void ResetSave()
-    {
-        playerStats.level = 1;
-        playerStats.hightScoreLevel = 1;
-        playerStats.highScoreLevelHard = 1;
-        playerStats.money = 0;
-        playerStats.nbr_stars = new int[50];
-        playerStats.nbr_starsHard = new int[50];
-        playerStats.Upgrades = new int[15];
-        playerStats.SavePlayer();
-    }
+
     public void SettingsButton()
 	{
 		settingsWindow.SetActive(value: true);
@@ -249,7 +218,7 @@ public class LevelManager : MonoBehaviour
         {
             for(int i = 0; i < stars.Length; i++)
             {
-                if(i < playerStats.nbr_stars[level-1])
+                if(i < nbr_stars)
                 {
                     stars[i].SetActive(true);
                 }
@@ -261,7 +230,7 @@ public class LevelManager : MonoBehaviour
         }
         else // Mode Hard
         {
-            if(playerStats.nbr_starsHard[level-1] == 1)
+            if(nbr_stars == 1)
             {
                 stars[0].SetActive(true);
                 stars[1].SetActive(true);
@@ -282,23 +251,61 @@ public class LevelManager : MonoBehaviour
         numberOfEnemies--;
         if(DifficultyLevel.difficultyLevel == 0)
         {
-            if(playerStats.nbr_stars[level-1] == 0)
+            if(nbr_stars == 0)
             {
-                playerStats.money += 10;
+                money += 10;
             }
         }
         else if(DifficultyLevel.difficultyLevel == 1)
         {
-            if(playerStats.nbr_starsHard[level-1] == 0)
+            if(nbr_stars == 0)
             {
-                playerStats.money += 15;
+                money += 15;
             }
         }
 
     }
-    private void LoadPlayerStats()
+    private void GetPlayerPrefs()
     {
-        playerStats.LoadPlayer();
-        money = playerStats.money;
+        money = PlayerPrefs.GetInt("money",0);
+        if(DifficultyLevel.difficultyLevel == 0)
+        {
+            nbr_stars = PlayerPrefs.GetInt("nbr_stars"+level,0);
+            highscore = PlayerPrefs.GetInt("highscore",1);
+        }
+        else if(DifficultyLevel.difficultyLevel == 1)
+        {
+            nbr_stars = PlayerPrefs.GetInt("nbr_starsHard"+level,0);
+            highscore = PlayerPrefs.GetInt("highscoreHard",1);
+        }       
+    }
+    private void SetPlayerPrefs()
+    {
+        PlayerPrefs.SetInt("money",money);
+        if(DifficultyLevel.difficultyLevel == 0)
+        {
+            PlayerPrefs.SetInt("nbr_stars"+level,nbr_stars);
+            PlayerPrefs.SetInt("highscore",highscore);
+        }
+        else if(DifficultyLevel.difficultyLevel == 1)
+        {
+            PlayerPrefs.SetInt("nbr_starsHard"+level,nbr_stars);
+            PlayerPrefs.SetInt("highscoreHard",highscore);
+        }
+    }
+    private void ResetSave()
+    {
+        PlayerPrefs.SetInt("money", 0);
+        PlayerPrefs.SetInt("highscore", 1);
+        PlayerPrefs.SetInt("highscoreHard", 1);
+        for(int i = 0; i <= 50; i++)
+        {
+            PlayerPrefs.SetInt("nbr_stars"+i, 0);
+            PlayerPrefs.SetInt("nbr_starsHard"+i, 0);
+        }
+        for(int i = 0; i <= 15; i++)
+        {
+            PlayerPrefs.SetInt("Upgrades"+i, 0);
+        }
     }
 }

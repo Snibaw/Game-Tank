@@ -12,7 +12,7 @@ public class LevelSelector : MonoBehaviour
     public Sprite LockButtonImage;
     public Button[] levelNormalButtons;
     public Button[] levelHardButtons;
-    private PlayerStats playerStats;
+    //private PlayerStats playerStats;
     private GameObject[] button_Stars;
     private int[] nbr_stars = new int[50];
     private int[] nbr_starsHard = new int[50];
@@ -21,19 +21,19 @@ public class LevelSelector : MonoBehaviour
     private void Start()
     {
         //Panel
-        ChangePanel(0);        
-        DifficultyLevel.difficultyLevel = 0;
+        ChangePanel(DifficultyLevel.difficultyLevel);
         
         //PlayerStats
-        playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
-        playerStats.LoadPlayer();
-        highscore = playerStats.hightScoreLevel;
-        highscoreHard = playerStats.highScoreLevelHard;
-        for (int i = 0; i < 50; i++)
-        {
-            nbr_stars[i] = playerStats.nbr_stars[i];
-            nbr_starsHard[i] = playerStats.nbr_starsHard[i];
-        }
+        // playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
+        // playerStats.LoadPlayer();
+        // highscore = playerStats.hightScoreLevel;
+        // highscoreHard = playerStats.highScoreLevelHard;
+        // for (int i = 0; i < 50; i++)
+        // {
+        //     nbr_stars[i] = playerStats.nbr_stars[i];
+        //     nbr_starsHard[i] = playerStats.nbr_starsHard[i];
+        // }
+        GetPlayerPrefs();
         
         //Lock Button
         InitButtons();
@@ -53,7 +53,7 @@ public class LevelSelector : MonoBehaviour
             button_Stars = levelNormalButtons[i].GetComponent<StarContainer>().GetStar();
             for (int j = 0; j < button_Stars.Length; j++)
             {
-                if (j < nbr_stars[i])
+                if (j < nbr_stars[i+1])
                 {
                     button_Stars[j].GetComponent<Image>().color = Color.white;
                 }
@@ -68,7 +68,7 @@ public class LevelSelector : MonoBehaviour
             button_Stars = levelHardButtons[i].GetComponent<StarContainer>().GetStar();
             for (int j = 0; j < button_Stars.Length; j++)
             {
-                if (j < nbr_starsHard[i])
+                if (j < nbr_starsHard[i+1])
                 {
                     button_Stars[j].GetComponent<Image>().color = Color.white;
                 }
@@ -123,5 +123,15 @@ public class LevelSelector : MonoBehaviour
             //Update Stars
             UpdateStarsUI(i,1);
 		}
+    }
+    private void GetPlayerPrefs()
+    {
+        highscore = PlayerPrefs.GetInt("highscore", 1);
+        highscoreHard = PlayerPrefs.GetInt("highscoreHard", 1);
+        for(int i = 0; i < 50; i++)
+        {
+            nbr_stars[i] = PlayerPrefs.GetInt("nbr_stars" + i, 0);
+            nbr_starsHard[i] = PlayerPrefs.GetInt("nbr_starsHard" + i, 0);
+        }
     }
 }
