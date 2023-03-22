@@ -246,6 +246,14 @@ PrefabInstance:
       propertyPath: lifes
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9078900142588570699, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078900142588570699, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.14
+      objectReference: {fileID: 0}
     - target: {fileID: 9078900143075885376, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
       propertyPath: m_Name
       value: Boucing_Enemy
@@ -551,6 +559,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 192283460}
+    - target: {fileID: 4250330400913464104, guid: 0edf21600c0853a488e3710d1b131ffe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7772294257457431048, guid: 0edf21600c0853a488e3710d1b131ffe, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

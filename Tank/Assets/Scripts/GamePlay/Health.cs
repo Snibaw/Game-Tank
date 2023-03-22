@@ -9,6 +9,7 @@ public class Health : MonoBehaviour
     private bool isInvincible = false;
     private LevelManager levelManager;
     public GameObject deathSmoke;
+    private bool isDead = false;
     // Start is called before the first frame update
 
     void Start()
@@ -36,9 +37,13 @@ public class Health : MonoBehaviour
             }
             else if(gameObject.tag == "Enemy")
             {
-                levelManager.OneEnemyDie();
-                Instantiate(deathSmoke, transform.position, Quaternion.identity);
-                Destroy(gameObject);
+                if(!isDead)
+                {
+                    isDead = true;
+                    levelManager.OneEnemyDie();
+                    Instantiate(deathSmoke, transform.position, Quaternion.identity);
+                    Destroy(gameObject);
+                }   
             }
         }
         if(isPlayer) // If the player is taking damage, make him invincible for 2 seconds
