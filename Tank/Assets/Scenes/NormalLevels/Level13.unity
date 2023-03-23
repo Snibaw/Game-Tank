@@ -247,12 +247,16 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9078900142588570699, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078900142588570699, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.86
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9078900142588570699, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9078900143075885376, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
       propertyPath: m_Name
@@ -264,11 +268,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9078900143075885404, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.04
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 9078900143075885404, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.24
+      value: -1.44
       objectReference: {fileID: 0}
     - target: {fileID: 9078900143075885404, guid: 8f68ff87dbad21e43ad51aa1c848dcdd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1390,11 +1394,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b41c0b24680c2f4991ce0fe7f8c7cfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  money: 0
-  hightScoreLevel: 0
-  nbr_stars: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  Upgrades: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1001 &4499989000635737158
 PrefabInstance:
   m_ObjectHideFlags: 0

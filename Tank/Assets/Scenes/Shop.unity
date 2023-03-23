@@ -465,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcfe65cce79311c4d88ce4957e1374fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeCost: 64000000c8000000fa000000fa0000005e0100002c010000f4010000000000002c010000960000005e010000
+  upgradeCost: 64000000c8000000fa000000fa0000005e0100002c0100009f860100f40100002c010000960000005e010000
   upgradeText:
   - 'Bullet Speed : Make your bullet go fast brbrbr'
   - 'Bouncing Bullet : Make your bullet bounce on walls'
@@ -2861,7 +2861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1634039590
 RectTransform:
   m_ObjectHideFlags: 0
