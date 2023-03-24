@@ -53,6 +53,10 @@ public class Bullet : MonoBehaviour
             other.gameObject.GetComponentInParent<Health>().TakeDamage(damage);
             StartCoroutine(ExplodeBeforeDestroy());
         }
+        else if(other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy")
+        {
+            StartCoroutine(ExplodeBeforeDestroy());
+        }
         else if(other.gameObject.tag == "Environnement" || other.gameObject.tag == "Obstacle") // If the bullet hits an obstacle, destroy the bullet or bounce if it cans
         {
             if(!canBounce || maxBounces <= 0)
