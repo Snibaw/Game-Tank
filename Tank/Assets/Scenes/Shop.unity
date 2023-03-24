@@ -469,8 +469,8 @@ MonoBehaviour:
   upgradeText:
   - 'Bullet Speed : Make your bullet go fast brbrbr'
   - 'Bouncing Bullet : Make your bullet bounce on walls'
-  - 'Doble shot : Shoot two bullets at once'
-  - 'Doble barrel: Add one barrel to your tank that can shoot a bullet                     
+  - 'Double shot : Shoot two bullets at once'
+  - 'Double barrel: Add one barrel to your tank that can shoot a bullet                     
     prohibited with triple shot'
   - 'Triple shot : Shoot three bullet at once, each one in a diferent direction                      
     prohibited with doble barrel'
