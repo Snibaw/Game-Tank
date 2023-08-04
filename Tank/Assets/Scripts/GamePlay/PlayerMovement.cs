@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Player
 {
@@ -11,12 +12,14 @@ namespace Player
         [SerializeField] private float speed = 2.5f;
         [SerializeField] private float rotation_speed = 10f;
         public GameObject Canon;
+        private SpriteRenderer canonSprite;
         public GameObject Hull;
         
         private LevelManager levelManager;
 
         private FixedJoystick moveJoystick;
         private FixedJoystick aimJoystick;
+        private Image aimJoystickImage;
         private Vector2 moveVelocity;
         private Vector2 aimVelocity;
         private Rigidbody2D rb;
@@ -25,9 +28,11 @@ namespace Player
         // Start is called before the first frame update
         void Start()
         {
+            canonSprite = Canon.GetComponent<SpriteRenderer>();
             levelManager = GameObject.FindGameObjectsWithTag("LevelManager")[0].GetComponent<LevelManager>();
             moveJoystick = GameObject.Find("MoveJoystick").GetComponent<FixedJoystick>();
             aimJoystick = GameObject.Find("AimJoystick").GetComponent<FixedJoystick>();
+            aimJoystickImage = aimJoystick.transform.GetChild(0).GetComponent<Image>();
             rb = GetComponent<Rigidbody2D>();
             playerShoot = GetComponent<PlayerShoot>();
         }
@@ -52,9 +57,16 @@ namespace Player
         }
         private void ShootIfJoystickMoved()
         {
-            if(aimJoystick.Horizontal != 0 || aimJoystick.Vertical != 0)
+            if(Mathf.Pow(aimJoystick.Horizontal,2)+Mathf.Pow(aimJoystick.Vertical,2) >= 0.8f)
             {
+                canonSprite.color = Color.red;
+                aimJoystickImage.color = Color.red;
                 playerShoot.TryToShoot();
+            }
+            else
+            {
+                canonSprite.color = Color.white;
+                aimJoystickImage.color = Color.white;
             }
         }
         private void JoystickMovement()
