@@ -18,9 +18,17 @@ public class AudioManager : MonoBehaviour
     {
         if(instance != null)
         {
-            Debug.LogWarning("More than one instance of AudioManager found!");
-            return;
+            if(instance.isMainMenu == this.isMainMenu)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            else
+            {
+                Destroy(instance.gameObject);
+            }
         }
+        DontDestroyOnLoad(gameObject);
         instance = this;
     }
     // Start is called before the first frame update

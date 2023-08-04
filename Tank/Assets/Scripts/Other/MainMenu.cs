@@ -6,6 +6,11 @@ public class MainMenu : MonoBehaviour
 
 	public GameObject settingsWindow;
 
+	private void Start()
+	{
+		settingsWindow.SetActive(false);
+	}
+
 	public void StartGame()
 	{
 		SceneManager.LoadScene("LevelSelect");

@@ -13,6 +13,7 @@ TagManager:
   - LifeUI
   - UpgradeButton
   - Shield
+  - SettingsWindow
   layers:
   - Default
   - TransparentFX

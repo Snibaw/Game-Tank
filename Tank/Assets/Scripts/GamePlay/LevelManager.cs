@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
     private Scene scene;
     public GameObject[] stars;
     
-    public GameObject settingsWindow;
+    private GameObject settingsWindow;
     private string levelNameText;
     private GameObject[] enemies;
     
@@ -42,6 +42,8 @@ public class LevelManager : MonoBehaviour
         scene = SceneManager.GetActiveScene();
         level = int.Parse(scene.name.Substring(5));
         playerHealth = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Health>();
+        settingsWindow = GameObject.Find("SettingsWindow");
+        settingsWindow.SetActive(false);
         //playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         //ResetSave();
         GetPlayerPrefs();

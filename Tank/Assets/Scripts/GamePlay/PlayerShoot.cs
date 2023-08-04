@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 namespace Player 
 {
     public class PlayerShoot : MonoBehaviour
@@ -37,6 +38,8 @@ namespace Player
         private float tripleShotTiming = 0.1f;
         private float bombRadius = 2f;
         private int bombDamage = 1;
+        private Image BombButtonImage;
+
         
         private LevelManager levelManager;
         // Start is called before the first frame update
@@ -44,6 +47,8 @@ namespace Player
         {
             tankCollider = gameObject.GetComponentInChildren<Collider2D>();
             levelManager = GameObject.FindGameObjectsWithTag("LevelManager")[0].GetComponent<LevelManager>();
+            BombButtonImage = GameObject.Find("BombButton").GetComponent<Image>();
+            
             
             InitUpgrade();
         }
@@ -69,25 +74,25 @@ namespace Player
             {
                 canShoot = true;
             }
-            if(Input.GetMouseButtonDown(0)) // Shoot a bullet for each barrels
+        }
+        public void TryToShoot()
+        {
+            if(canShoot)
             {
-                if(canShoot)
+                canShoot = false;
+                currentDelayShoot = reloadDelay;
+                if(isTripleShot)
                 {
-                    canShoot = false;
-                    currentDelayShoot = reloadDelay;
-                    if(isTripleShot)
-                    {
-                        StartCoroutine(TripleShot());
-                    }
-                    else if(isDobleShot)
-                    {
-                        StartCoroutine(DobleShot());
-                    }    
-                    else
-                    {
-                        ShootABullet();
-                    }  
+                    StartCoroutine(TripleShot());
                 }
+                else if(isDobleShot)
+                {
+                    StartCoroutine(DobleShot());
+                }    
+                else
+                {
+                    ShootABullet();
+                }  
             }
         }
         private void BombManagement() // Bomb
@@ -98,17 +103,22 @@ namespace Player
             }
             if(currentDelayBomb <= 0)
             {
+                Debug.Log("Can Bomb");
+                BombButtonImage.color = new Color(255,255,255,255f/255f);
+                
                 canBomb = true;
             }
-            if(Input.GetKeyDown(KeyCode.Space)) // Spawn a bomb
+        }
+        public void TryToBomb()
+        {
+            if(canBomb)
             {
-                if(canBomb)
-                {
-                    canBomb = false;
-                    currentDelayBomb = bombDelay;
-                    GameObject bomb = Instantiate(bomb_prefab, transform.position, Quaternion.identity);
-                    bomb.GetComponent<BombBehaviour>().Initialise(bombRadius, bombDamage);
-                }
+                canBomb = false;
+                currentDelayBomb = bombDelay;
+                GameObject bomb = Instantiate(bomb_prefab, transform.position, Quaternion.identity);
+                bomb.GetComponent<BombBehaviour>().Initialise(bombRadius, bombDamage);
+                BombButtonImage.color = new Color(0, 0, 0, 200f/255f);
+                
             }
         }
         private void ShootABullet()

@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -2883,14 +2883,14 @@ TextureImporter:
       tileset_grassland_41: 1808854179
       tileset_grassland_33: -9050550
       tileset_grassland_38: 105166083
-      tileset_grassland_92: -518913751
-      tileset_grassland_23: 358137035
       tileset_grassland_104: 658934500
+      tileset_grassland_23: 358137035
+      tileset_grassland_92: -518913751
       tileset_grassland_6: -1512763521
       tileset_grassland_65: 945390910
+      tileset_grassland_67: -1156405564
       tileset_grassland_27: -427044476
       tileset_grassland_112: 1322339552
-      tileset_grassland_67: -1156405564
       tileset_grassland_77: -821992387
       tileset_grassland_3: 1456183526
       tileset_grassland_21: -2010467896
