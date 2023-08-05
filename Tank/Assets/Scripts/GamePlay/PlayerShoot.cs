@@ -23,7 +23,7 @@ namespace Player
         [SerializeField] private string tag = "Enemy";
         [SerializeField] private bool canBounce = false;
         [SerializeField] private float speed = 10f;
-        [SerializeField] private float max_distance = 2f;
+        [SerializeField] public float max_distance = 2f;
         [SerializeField] private float damage = 1f;
         [SerializeField] private int life_time = 50;
         [SerializeField] private float bombDelay = 3f;

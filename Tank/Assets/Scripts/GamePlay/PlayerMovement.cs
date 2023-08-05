@@ -12,6 +12,7 @@ namespace Player
         [SerializeField] private float speed = 2.5f;
         [SerializeField] private float rotation_speed = 10f;
         public GameObject Canon;
+        private GameObject Barrel;
         private SpriteRenderer canonSprite;
         public GameObject Hull;
         
@@ -24,6 +25,7 @@ namespace Player
         private Vector2 aimVelocity;
         private Rigidbody2D rb;
         private PlayerShoot playerShoot;
+        private LineRenderer lineRenderer;
         
         // Start is called before the first frame update
         void Start()
@@ -35,6 +37,8 @@ namespace Player
             aimJoystickImage = aimJoystick.transform.GetChild(0).GetComponent<Image>();
             rb = GetComponent<Rigidbody2D>();
             playerShoot = GetComponent<PlayerShoot>();
+            lineRenderer = GetComponent<LineRenderer>();
+            Barrel = Canon.transform.GetChild(0).gameObject;
         }
 
         // Update is called once per frame
@@ -52,14 +56,59 @@ namespace Player
 
             //Rotate canon with mouse
             RotateCanon();
+            CreateVisibleLine();
             ShootIfJoystickMoved();
+
             
+        }
+        private void CreateVisibleLine()
+        {
+            //Make a visible line in game going in front of the canon
+            if(aimJoystick.Horizontal!=0 || aimJoystick.Vertical!=0)
+            {
+                //Create a Raycast, if it hits something, draw a line to it
+                RaycastHit2D hit = Physics2D.Raycast(Barrel.transform.position, new Vector2(aimVelocity.x, aimVelocity.y), playerShoot.max_distance);
+
+                lineRenderer.enabled = true;
+                lineRenderer.SetPosition(0, new Vector3(Barrel.transform.position.x, Barrel.transform.position.y, -1));
+                if(hit.collider != null)
+                {
+                    lineRenderer.SetPosition(1, new Vector3(hit.point.x, hit.point.y, -1));
+                    //Change color to red
+                    if(hit.collider.gameObject.tag == "Enemy")
+                    {
+                        lineRenderer.startColor = Color.red;
+                        lineRenderer.endColor = Color.red;
+                    }
+                    else
+                    {
+                        lineRenderer.startColor = Color.white;
+                        lineRenderer.endColor = Color.white;
+                    }
+                }
+                else
+                {
+                    lineRenderer.SetPosition(1, new Vector3(Barrel.transform.position.x, Barrel.transform.position.y, -1) + new Vector3(aimVelocity.x, aimVelocity.y, 0).normalized * playerShoot.max_distance);
+                    //Change color to white
+                    lineRenderer.startColor = Color.black;
+                    lineRenderer.endColor = Color.black;
+                }
+
+
+                
+            }
+            else
+            {
+                lineRenderer.enabled = false;
+            }
+
         }
         private void ShootIfJoystickMoved()
         {
             if(Mathf.Pow(aimJoystick.Horizontal,2)+Mathf.Pow(aimJoystick.Vertical,2) >= 0.8f)
             {
-                canonSprite.color = Color.red;
+                // Make the canon this color : #FF9E9E
+                canonSprite.color =  new Color(1f, 0.6196079f, 0.6196079f, 1f);
                 aimJoystickImage.color = Color.red;
                 playerShoot.TryToShoot();
             }
