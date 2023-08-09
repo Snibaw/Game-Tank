@@ -33,6 +33,7 @@ public class LevelManager : MonoBehaviour
     private GameObject settingsWindow;
     private string levelNameText;
     private GameObject[] enemies;
+    private PauseButton pauseButton;
     
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,7 @@ public class LevelManager : MonoBehaviour
         playerHealth = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<Health>();
         settingsWindow = GameObject.Find("SettingsWindow");
         settingsWindow.SetActive(false);
+        pauseButton = GameObject.Find("PauseButton").GetComponent<PauseButton>();
         //playerStats = GameObject.FindGameObjectsWithTag("Player")[0].GetComponent<PlayerStats>();
         //ResetSave();
         GetPlayerPrefs();
@@ -80,10 +82,6 @@ public class LevelManager : MonoBehaviour
         if(numberOfEnemies == 0)
         {
             LevelWin();
-        }
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            LevelPause();
         }
     }
     private void LevelWin()
@@ -142,6 +140,7 @@ public class LevelManager : MonoBehaviour
         isPaused = !isPaused;
         if(isPaused)
         {
+            pauseButton.ChangeImage(1);
             OpenPanel();
             TopText.text = "Pause";
             if(highscore > level)
@@ -155,6 +154,7 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
+            pauseButton.ChangeImage(0);
             Time.timeScale = 1;
             Panel.SetActive(false);
             CloseSettingsWindow();

@@ -104,7 +104,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 2
+    serializedVersion: 3
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -117,7 +117,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    accuratePlacement: 0
+    buildHeightMesh: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -241,9 +241,17 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -502,6 +510,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -605,6 +614,9 @@ PrefabInstance:
       value: UpgradeButton (8)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!224 &484165845 stripped
 RectTransform:
@@ -616,6 +628,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -719,6 +732,9 @@ PrefabInstance:
       value: UpgradeButton (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!224 &532770021 stripped
 RectTransform:
@@ -964,6 +980,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 136020697371346560, guid: 67fe82cca2af6e64785ed5b1e76181c0, type: 3}
@@ -1019,6 +1036,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67fe82cca2af6e64785ed5b1e76181c0, type: 3}
 --- !u!1 &797400162
 GameObject:
@@ -1697,7 +1717,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1706,6 +1728,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -1809,6 +1832,9 @@ PrefabInstance:
       value: UpgradeButton (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!224 &1041235004 stripped
 RectTransform:
@@ -1831,6 +1857,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -1934,6 +1961,9 @@ PrefabInstance:
       value: UpgradeButton (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!224 &1137565531 stripped
 RectTransform:
@@ -1956,6 +1986,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -2059,6 +2090,9 @@ PrefabInstance:
       value: UpgradeButton (7)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!114 &1318330449 stripped
 MonoBehaviour:
@@ -2348,6 +2382,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -2451,6 +2486,9 @@ PrefabInstance:
       value: UpgradeButton (9)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!224 &1432188183 stripped
 RectTransform:
@@ -2473,6 +2511,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -2576,6 +2615,9 @@ PrefabInstance:
       value: UpgradeButton (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!224 &1476341132 stripped
 RectTransform:
@@ -2598,6 +2640,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -2701,6 +2744,9 @@ PrefabInstance:
       value: UpgradeButton (10)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!224 &1478215158 stripped
 RectTransform:
@@ -2723,6 +2769,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -2826,6 +2873,9 @@ PrefabInstance:
       value: UpgradeButton (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!224 &1587084626 stripped
 RectTransform:
@@ -3021,6 +3071,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -3124,6 +3175,9 @@ PrefabInstance:
       value: UpgradeButton (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!224 &1797440444 stripped
 RectTransform:
@@ -3430,6 +3484,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2003690800}
     m_Modifications:
     - target: {fileID: 2735538670676296116, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
@@ -3525,6 +3580,9 @@ PrefabInstance:
       value: UpgradeButton (0)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb663f565b620f044b0480ff4465ec3e, type: 3}
 --- !u!114 &7193471551019576570 stripped
 MonoBehaviour:

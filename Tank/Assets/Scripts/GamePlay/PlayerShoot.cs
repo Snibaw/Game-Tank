@@ -103,7 +103,6 @@ namespace Player
             }
             if(currentDelayBomb <= 0)
             {
-                Debug.Log("Can Bomb");
                 BombButtonImage.color = new Color(255,255,255,255f/255f);
                 
                 canBomb = true;

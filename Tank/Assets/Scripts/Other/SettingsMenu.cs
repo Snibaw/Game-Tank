@@ -18,8 +18,10 @@ public class SettingsMenu : MonoBehaviour
     private float musicValueForSlider;
     private float soundValueForSlider;
 
+    private LevelManager levelManager;
     public void Start()
     {
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         InitVolumeAndSound();
 
         // resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();
@@ -79,5 +81,9 @@ public class SettingsMenu : MonoBehaviour
     public void ClearSavedData()
     {
         PlayerPrefs.DeleteAll();
+    }
+    public void CloseSettingsWindow()
+    {
+        levelManager.CloseSettingsWindow();
     }
 }

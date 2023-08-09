@@ -26,6 +26,8 @@ namespace Player
         private Rigidbody2D rb;
         private PlayerShoot playerShoot;
         private LineRenderer lineRenderer;
+        private Vector2 aimDir;
+        public bool autoAim = false;
         
         // Start is called before the first frame update
         void Start()
@@ -54,6 +56,8 @@ namespace Player
 
             
 
+            //Aim assist if no joystick input
+            if(aimJoystick.Horizontal == 0 && aimJoystick.Vertical == 0 && autoAim) AutoShoot();
             //Rotate canon with mouse
             RotateCanon();
             CreateVisibleLine();
@@ -64,43 +68,49 @@ namespace Player
         private void CreateVisibleLine()
         {
             //Make a visible line in game going in front of the canon
-            if(aimJoystick.Horizontal!=0 || aimJoystick.Vertical!=0)
+            Vector2 rayDirection;
+            if(aimJoystick.Horizontal!=0 || aimJoystick.Vertical!=0 || !autoAim)
             {
-                //Create a Raycast, if it hits something, draw a line to it
-                RaycastHit2D hit = Physics2D.Raycast(Barrel.transform.position, new Vector2(aimVelocity.x, aimVelocity.y), playerShoot.max_distance);
+                rayDirection = new Vector2(aimJoystick.Horizontal, aimJoystick.Vertical);
+            }
+            else
+            {
+                //The direction is the front of the barrel
+                rayDirection = new Vector2(Barrel.transform.position.x, Barrel.transform.position.y) - new Vector2(Canon.transform.position.x, Canon.transform.position.y);
+                
+            }
+             //Create a Raycast, if it hits something, draw a line to it
+            RaycastHit2D hit = Physics2D.Raycast(Barrel.transform.position, rayDirection, playerShoot.max_distance);
 
-                lineRenderer.enabled = true;
-                lineRenderer.SetPosition(0, new Vector3(Barrel.transform.position.x, Barrel.transform.position.y, -1));
-                if(hit.collider != null)
+            lineRenderer.enabled = true;
+            lineRenderer.SetPosition(0, new Vector3(Barrel.transform.position.x, Barrel.transform.position.y, -1));
+            if(hit.collider != null)
+            {
+                lineRenderer.SetPosition(1, new Vector3(hit.point.x, hit.point.y, -1));
+                //Change color to red
+                if(hit.collider.gameObject.tag == "Enemy")
                 {
-                    lineRenderer.SetPosition(1, new Vector3(hit.point.x, hit.point.y, -1));
-                    //Change color to red
-                    if(hit.collider.gameObject.tag == "Enemy")
+                    lineRenderer.startColor = Color.red;
+                    lineRenderer.endColor = Color.red;
+                    if(aimJoystick.Horizontal == 0 && aimJoystick.Vertical == 0 && autoAim)
                     {
-                        lineRenderer.startColor = Color.red;
-                        lineRenderer.endColor = Color.red;
-                    }
-                    else
-                    {
-                        lineRenderer.startColor = Color.white;
-                        lineRenderer.endColor = Color.white;
+                        playerShoot.TryToShoot();
                     }
                 }
                 else
                 {
-                    lineRenderer.SetPosition(1, new Vector3(Barrel.transform.position.x, Barrel.transform.position.y, -1) + new Vector3(aimVelocity.x, aimVelocity.y, 0).normalized * playerShoot.max_distance);
-                    //Change color to white
-                    lineRenderer.startColor = Color.black;
-                    lineRenderer.endColor = Color.black;
+                    lineRenderer.startColor = Color.white;
+                    lineRenderer.endColor = Color.white;
                 }
-
-
-                
             }
             else
             {
-                lineRenderer.enabled = false;
+                lineRenderer.SetPosition(1, new Vector3(Barrel.transform.position.x, Barrel.transform.position.y, -1) + new Vector3(aimVelocity.x, aimVelocity.y, 0).normalized * playerShoot.max_distance);
+                //Change color to white
+                lineRenderer.startColor = Color.black;
+                lineRenderer.endColor = Color.black;
             }
+
 
         }
         private void ShootIfJoystickMoved()
@@ -167,6 +177,29 @@ namespace Player
                 var rotation_quaternion = Quaternion.Euler(0, 0, rot_y-90); // Convert the angle to quaternion
                 Canon.transform.rotation = Quaternion.Lerp(Canon.transform.rotation, rotation_quaternion, Time.deltaTime * rotation_speed); // Smoothly rotate the sprite
             }   
+        }
+        private void AutoShoot()
+        {
+            //Make the canon aim at the closest enemy
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            float min_distance = Mathf.Infinity;
+            GameObject closest_enemy = null;
+            foreach(GameObject enemy in enemies)
+            {
+                float distance = Vector2.Distance(enemy.transform.position, Canon.transform.position);
+                if(distance < min_distance)
+                {
+                    min_distance = distance;
+                    closest_enemy = enemy;
+                }
+            }
+            if(closest_enemy != null)
+            {
+                Vector2 direction = closest_enemy.transform.position - Canon.transform.position;
+                float rot_y = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calculate the angle of the direction in y axis
+                var rotation_quaternion = Quaternion.Euler(0, 0, rot_y-90); // Convert the angle to quaternion
+                Canon.transform.rotation = Quaternion.Lerp(Canon.transform.rotation, rotation_quaternion, Time.deltaTime * rotation_speed); // Smoothly rotate the sprite
+            }
         }
     }
 
