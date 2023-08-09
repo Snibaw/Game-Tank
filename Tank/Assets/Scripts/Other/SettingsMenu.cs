@@ -17,11 +17,12 @@ public class SettingsMenu : MonoBehaviour
     public Slider soundSlider;
     private float musicValueForSlider;
     private float soundValueForSlider;
+    public bool isMainMenu = false;
 
     private LevelManager levelManager;
     public void Start()
     {
-        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        if(!isMainMenu) levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         InitVolumeAndSound();
 
         // resolutions = Screen.resolutions.Select(resolution => new Resolution { width = resolution.width, height = resolution.height }).Distinct().ToArray();

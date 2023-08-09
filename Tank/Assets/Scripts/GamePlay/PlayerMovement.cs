@@ -28,6 +28,10 @@ namespace Player
         private LineRenderer lineRenderer;
         private Vector2 aimDir;
         public bool autoAim = false;
+        public bool aimAssist = true;
+        private bool followAimAssist = false;
+        public float aimAssistStrength = 0.5f;
+        private Vector2 directionAimAsssit = Vector2.zero;
         
         // Start is called before the first frame update
         void Start()
@@ -41,6 +45,10 @@ namespace Player
             playerShoot = GetComponent<PlayerShoot>();
             lineRenderer = GetComponent<LineRenderer>();
             Barrel = Canon.transform.GetChild(0).gameObject;
+
+            autoAim = PlayerPrefs.GetInt("AutoAim", 0) == 1;
+            aimAssist = PlayerPrefs.GetInt("AimAssist", 1) == 1;
+            aimAssistStrength = PlayerPrefs.GetFloat("AimAssistStrength", 0.5f);
         }
 
         // Update is called once per frame
@@ -58,6 +66,7 @@ namespace Player
 
             //Aim assist if no joystick input
             if(aimJoystick.Horizontal == 0 && aimJoystick.Vertical == 0 && autoAim) AutoShoot();
+            if(aimAssist) AimAssist();
             //Rotate canon with mouse
             RotateCanon();
             CreateVisibleLine();
@@ -71,7 +80,8 @@ namespace Player
             Vector2 rayDirection;
             if(aimJoystick.Horizontal!=0 || aimJoystick.Vertical!=0 || !autoAim)
             {
-                rayDirection = new Vector2(aimJoystick.Horizontal, aimJoystick.Vertical);
+                if(followAimAssist) rayDirection = directionAimAsssit;
+                else rayDirection = new Vector2(aimJoystick.Horizontal, aimJoystick.Vertical);
             }
             else
             {
@@ -173,7 +183,9 @@ namespace Player
             Vector2 aimDir = aimInput.normalized;
             if(aimDir.x != 0 || aimDir.y != 0)
             {
-                float rot_y = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg; // Calculate the angle of the direction in y axis
+                float rot_y;
+                if(followAimAssist) rot_y = Mathf.Atan2(directionAimAsssit.y, directionAimAsssit.x) * Mathf.Rad2Deg; // Calculate the angle of the direction in y axis
+                else rot_y = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg; // Calculate the angle of the direction in y axis
                 var rotation_quaternion = Quaternion.Euler(0, 0, rot_y-90); // Convert the angle to quaternion
                 Canon.transform.rotation = Quaternion.Lerp(Canon.transform.rotation, rotation_quaternion, Time.deltaTime * rotation_speed); // Smoothly rotate the sprite
             }   
@@ -200,6 +212,35 @@ namespace Player
                 var rotation_quaternion = Quaternion.Euler(0, 0, rot_y-90); // Convert the angle to quaternion
                 Canon.transform.rotation = Quaternion.Lerp(Canon.transform.rotation, rotation_quaternion, Time.deltaTime * rotation_speed); // Smoothly rotate the sprite
             }
+        }
+        private void AimAssist()
+        {
+            // If the canon is close to the ennemy direction, make it aim at the enemy
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            bool enemy_in_range = false;
+            foreach(GameObject enemy in enemies)
+            {
+                // Get the direction between where the player is aiming with the joystick and the enemy
+                Vector2 direction = enemy.transform.position - Canon.transform.position+new Vector3(aimVelocity.x, aimVelocity.y, 0).normalized;
+                float rot_y = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Calculate the angle of the direction in y axis
+                var rotation_quaternion = Quaternion.Euler(0, 0, rot_y-90); // Convert the angle to quaternion
+                // Create a raycast and check if it hits an enemy
+                
+
+                if(Quaternion.Angle(Canon.transform.rotation, rotation_quaternion) < aimAssistStrength)
+                {
+                    RaycastHit2D hit = Physics2D.Raycast(Canon.transform.position, direction, playerShoot.max_distance);
+                    if(hit.collider != null && hit.collider.gameObject.tag == "Enemy")
+                    {
+                        enemy_in_range = true;
+                        followAimAssist = true;
+                        directionAimAsssit = enemy.transform.position - Canon.transform.position;
+                    }
+                        
+                }
+            }
+            if(!enemy_in_range)
+                followAimAssist = false;
         }
     }
 
